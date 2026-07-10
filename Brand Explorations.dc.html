@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&amp;family=Markazi+Text:wght@400;500;600;700&amp;family=Noto+Kufi+Arabic:wght@400;500;600;700;800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;700;900&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=Amiri:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0eee9;font-family:'Vazirmatn',system-ui,sans-serif}
+a{color:#1a1a1a;text-decoration:none}a:hover{color:#000}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 'Vazirmatn',system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Vazirmatn',system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 'Vazirmatn',system-ui,sans-serif;color:rgba(0,0,0,.5)}
+.dv-group{font:700 11px/1 'Vazirmatn',sans-serif;color:rgba(0,0,0,.45);margin:26px 0 12px;letter-spacing:.5px}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t4">
+  <div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Logos, take 3 — Blossom palette (<a href="#2h">2h</a>) + Estedad wordmark, four different concepts</span></div>
+
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="4a">
+      <div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a>Quote Marks — «گواه»: guillemets double as play arrows</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:200px;height:120px;background:#FAF0ED;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;font-family:'Estedad',sans-serif;font-weight:900;">
+              <span style="font-size:34px;color:#B03A48;line-height:1;">«</span>
+              <span style="font-size:31px;color:#3A2028;line-height:1;padding-bottom:6px;">گواه</span>
+              <span style="font-size:34px;color:#D98E4F;line-height:1;">»</span>
+            </div>
+          </div>
+          <div style="width:200px;height:120px;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;font-family:'Estedad',sans-serif;font-weight:900;">
+              <span style="font-size:34px;color:#C9505E;line-height:1;">«</span>
+              <span style="font-size:31px;color:#FAF0ED;line-height:1;padding-bottom:6px;">گواه</span>
+              <span style="font-size:34px;color:#D98E4F;line-height:1;">»</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <span style="width:26px;height:26px;border-radius:8px;background:#B03A48;display:flex;align-items:center;justify-content:center;font-family:'Estedad',sans-serif;font-weight:900;font-size:17px;color:#FFFFFF;padding-bottom:2px;">«</span>
+          <span style="font-family:'Estedad',sans-serif;font-size:17px;font-weight:900;color:#3A2028;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="4b">
+      <div class="dv-olabel"><a class="dv-oid" href="#4b">4b</a>Blossom — pomegranate-flower petals around a play</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:200px;height:120px;background:#FAF0ED;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:64px;height:64px;">
+              <span style="position:absolute;top:0;left:19px;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:14px;left:38px;width:26px;height:26px;border-radius:50%;background:#B03A48;"></span>
+              <span style="position:absolute;top:36px;left:30px;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:36px;left:8px;width:26px;height:26px;border-radius:50%;background:#B03A48;"></span>
+              <span style="position:absolute;top:14px;left:0;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:19px;left:19px;width:26px;height:26px;border-radius:50%;background:#3A2028;"></span>
+              <span style="position:absolute;top:27px;left:29px;width:0;height:0;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;border-right:8px solid #FFFFFF;"></span>
+            </div>
+          </div>
+          <div style="width:200px;height:120px;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:64px;height:64px;">
+              <span style="position:absolute;top:0;left:19px;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:14px;left:38px;width:26px;height:26px;border-radius:50%;background:#C9505E;"></span>
+              <span style="position:absolute;top:36px;left:30px;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:36px;left:8px;width:26px;height:26px;border-radius:50%;background:#C9505E;"></span>
+              <span style="position:absolute;top:14px;left:0;width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+              <span style="position:absolute;top:19px;left:19px;width:26px;height:26px;border-radius:50%;background:#FAF0ED;"></span>
+              <span style="position:absolute;top:27px;left:29px;width:0;height:0;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;border-right:8px solid #3A2028;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:29px;height:29px;">
+            <span style="position:absolute;top:0;left:8.5px;width:12px;height:12px;border-radius:50%;background:#D98E4F;"></span>
+            <span style="position:absolute;top:6px;left:17px;width:12px;height:12px;border-radius:50%;background:#B03A48;"></span>
+            <span style="position:absolute;top:16px;left:13px;width:12px;height:12px;border-radius:50%;background:#D98E4F;"></span>
+            <span style="position:absolute;top:16px;left:4px;width:12px;height:12px;border-radius:50%;background:#B03A48;"></span>
+            <span style="position:absolute;top:6px;left:0;width:12px;height:12px;border-radius:50%;background:#D98E4F;"></span>
+            <span style="position:absolute;top:8.5px;left:8.5px;width:12px;height:12px;border-radius:50%;background:#3A2028;"></span>
+          </div>
+          <span style="font-family:'Estedad',sans-serif;font-size:17px;font-weight:900;color:#3A2028;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="4c">
+      <div class="dv-olabel"><a class="dv-oid" href="#4c">4c</a>Fanned Clips — a stack of customer videos, mid-shuffle</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:200px;height:120px;background:#FAF0ED;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:66px;height:62px;">
+              <span style="position:absolute;top:6px;left:2px;width:38px;height:50px;border-radius:10px;background:#D98E4F;transform:rotate(-14deg);"></span>
+              <span style="position:absolute;top:3px;left:12px;width:38px;height:50px;border-radius:10px;background:#B03A48;transform:rotate(-4deg);"></span>
+              <span style="position:absolute;top:2px;left:23px;width:38px;height:52px;border-radius:10px;background:#3A2028;transform:rotate(7deg);display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Estedad',sans-serif;font-weight:900;font-size:22px;line-height:1;color:#FFFFFF;padding-bottom:4px;">«</span>
+              </span>
+            </div>
+          </div>
+          <div style="width:200px;height:120px;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:66px;height:62px;">
+              <span style="position:absolute;top:6px;left:2px;width:38px;height:50px;border-radius:10px;background:#D98E4F;transform:rotate(-14deg);"></span>
+              <span style="position:absolute;top:3px;left:12px;width:38px;height:50px;border-radius:10px;background:#C9505E;transform:rotate(-4deg);"></span>
+              <span style="position:absolute;top:2px;left:23px;width:38px;height:52px;border-radius:10px;background:#FAF0ED;transform:rotate(7deg);display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Estedad',sans-serif;font-weight:900;font-size:22px;line-height:1;color:#3A2028;padding-bottom:4px;">«</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:31px;height:29px;">
+            <span style="position:absolute;top:3px;left:1px;width:17px;height:23px;border-radius:5px;background:#D98E4F;transform:rotate(-14deg);"></span>
+            <span style="position:absolute;top:1.5px;left:6px;width:17px;height:23px;border-radius:5px;background:#B03A48;transform:rotate(-4deg);"></span>
+            <span style="position:absolute;top:1px;left:11px;width:17px;height:24px;border-radius:5px;background:#3A2028;transform:rotate(7deg);display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Estedad',sans-serif;font-weight:900;font-size:11px;line-height:1;color:#FFFFFF;padding-bottom:2px;">«</span>
+            </span>
+          </div>
+          <span style="font-family:'Estedad',sans-serif;font-size:17px;font-weight:900;color:#3A2028;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="4d">
+      <div class="dv-olabel"><a class="dv-oid" href="#4d">4d</a>Echo Rings — one voice, rippling outward</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:200px;height:120px;background:#FAF0ED;display:flex;align-items:center;justify-content:center;">
+            <div style="width:64px;height:64px;border-radius:50%;background:#D98E4F;display:flex;align-items:center;justify-content:center;">
+              <div style="width:46px;height:46px;border-radius:50%;background:#B03A48;display:flex;align-items:center;justify-content:center;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+                  <span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7.5px solid #FFFFFF;margin-left:2px;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width:200px;height:120px;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+            <div style="width:64px;height:64px;border-radius:50%;background:#D98E4F;display:flex;align-items:center;justify-content:center;">
+              <div style="width:46px;height:46px;border-radius:50%;background:#C9505E;display:flex;align-items:center;justify-content:center;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#FAF0ED;display:flex;align-items:center;justify-content:center;">
+                  <span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7.5px solid #3A2028;margin-left:2px;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="width:27px;height:27px;border-radius:50%;background:#D98E4F;display:flex;align-items:center;justify-content:center;">
+            <div style="width:19px;height:19px;border-radius:50%;background:#B03A48;display:flex;align-items:center;justify-content:center;">
+              <div style="width:11px;height:11px;border-radius:50%;background:#3A2028;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:2px solid transparent;border-bottom:2px solid transparent;border-right:3px solid #FFFFFF;margin-left:1px;"></span>
+              </div>
+            </div>
+          </div>
+          <span style="font-family:'Estedad',sans-serif;font-size:17px;font-weight:900;color:#3A2028;">گواه</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="dv-next">Next: "apply <a class="dv-oid" href="#4a">4a</a> + Blossom palette + Estedad across the site" · "riff on <a class="dv-oid" href="#4b">4b</a>" · "show these logos bigger, in context"</p>
+</section>
+
+<section class="dv-turn" id="t3">
+  <div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Colorful logos + new fonts — built on the Pomegranate palette (<a href="#1e">1e</a>)</span></div>
+
+  <div class="dv-group">LOGOS — MORE COLOR, MORE CHARACTER</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="3a">
+      <div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Pomegranate Seed — the fruit itself, seeds as testimonials</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F7F4EF;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:60px;height:60px;">
+              <span style="position:absolute;top:-2px;left:23px;width:14px;height:14px;background:#C43D4B;transform:rotate(45deg);border-radius:3px;"></span>
+              <span style="position:absolute;top:8px;left:6px;width:48px;height:48px;border-radius:50%;background:#C43D4B;"></span>
+              <span style="position:absolute;top:16px;left:14px;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:40px;left:16px;width:8px;height:8px;border-radius:50%;background:#F2C879;"></span>
+              <span style="position:absolute;top:18px;left:39px;width:8px;height:8px;border-radius:50%;background:#F2C879;"></span>
+              <span style="position:absolute;top:41px;left:38px;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:23px;left:23px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #FFFFFF;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2B1F26;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:60px;height:60px;">
+              <span style="position:absolute;top:-2px;left:23px;width:14px;height:14px;background:#D45864;transform:rotate(45deg);border-radius:3px;"></span>
+              <span style="position:absolute;top:8px;left:6px;width:48px;height:48px;border-radius:50%;background:#D45864;"></span>
+              <span style="position:absolute;top:16px;left:14px;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:40px;left:16px;width:8px;height:8px;border-radius:50%;background:#F2C879;"></span>
+              <span style="position:absolute;top:18px;left:39px;width:8px;height:8px;border-radius:50%;background:#F2C879;"></span>
+              <span style="position:absolute;top:41px;left:38px;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:23px;left:23px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #2B1F26;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:27px;height:27px;">
+            <span style="position:absolute;top:-1px;left:10px;width:7px;height:7px;background:#C43D4B;transform:rotate(45deg);border-radius:1.5px;"></span>
+            <span style="position:absolute;top:4px;left:2px;width:23px;height:23px;border-radius:50%;background:#C43D4B;"></span>
+            <span style="position:absolute;top:8px;left:6px;width:4.5px;height:4.5px;border-radius:50%;background:#D9A441;"></span>
+            <span style="position:absolute;top:19px;left:17px;width:4.5px;height:4.5px;border-radius:50%;background:#F2C879;"></span>
+            <span style="position:absolute;top:11px;left:11px;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #FFFFFF;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#2B1F26;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="3b">
+      <div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a>Mosaic Wall — a colorful wall of customer clips</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F7F4EF;display:flex;align-items:center;justify-content:center;">
+            <div style="display:grid;grid-template-columns:17px 17px 17px;gap:5px;">
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#C43D4B;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D97742;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D97742;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#2B1F26;display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #FFFFFF;"></span></span>
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#C43D4B;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#C43D4B;display:block;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2B1F26;display:flex;align-items:center;justify-content:center;">
+            <div style="display:grid;grid-template-columns:17px 17px 17px;gap:5px;">
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D45864;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D97742;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D97742;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#F7F4EF;display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #2B1F26;"></span></span>
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D45864;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D9A441;display:block;"></span>
+              <span style="height:17px;border-radius:5px;background:#D45864;display:block;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="display:grid;grid-template-columns:8px 8px 8px;gap:2.5px;">
+            <span style="height:8px;border-radius:2.5px;background:#D9A441;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#C43D4B;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#D97742;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#D97742;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#2B1F26;display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:2px solid transparent;border-bottom:2px solid transparent;border-right:3px solid #FFFFFF;"></span></span>
+            <span style="height:8px;border-radius:2.5px;background:#D9A441;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#C43D4B;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#D9A441;display:block;"></span>
+            <span style="height:8px;border-radius:2.5px;background:#C43D4B;display:block;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#2B1F26;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="3c">
+      <div class="dv-olabel"><a class="dv-oid" href="#3c">3c</a>Layered Star — Persian star, stacked red on gold</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F7F4EF;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:60px;height:60px;">
+              <span style="position:absolute;top:16px;left:16px;width:34px;height:34px;border-radius:8px;background:#D9A441;"></span>
+              <span style="position:absolute;top:16px;left:16px;width:34px;height:34px;border-radius:8px;background:#D9A441;transform:rotate(45deg);"></span>
+              <span style="position:absolute;top:10px;left:10px;width:34px;height:34px;border-radius:8px;background:#C43D4B;"></span>
+              <span style="position:absolute;top:10px;left:10px;width:34px;height:34px;border-radius:8px;background:#C43D4B;transform:rotate(45deg);"></span>
+              <span style="position:absolute;top:20px;left:25px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:11px solid #FFFFFF;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2B1F26;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:60px;height:60px;">
+              <span style="position:absolute;top:16px;left:16px;width:34px;height:34px;border-radius:8px;background:#D9A441;"></span>
+              <span style="position:absolute;top:16px;left:16px;width:34px;height:34px;border-radius:8px;background:#D9A441;transform:rotate(45deg);"></span>
+              <span style="position:absolute;top:10px;left:10px;width:34px;height:34px;border-radius:8px;background:#D45864;"></span>
+              <span style="position:absolute;top:10px;left:10px;width:34px;height:34px;border-radius:8px;background:#D45864;transform:rotate(45deg);"></span>
+              <span style="position:absolute;top:20px;left:25px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:11px solid #2B1F26;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:28px;height:28px;">
+            <span style="position:absolute;top:8px;left:8px;width:16px;height:16px;border-radius:4px;background:#D9A441;"></span>
+            <span style="position:absolute;top:8px;left:8px;width:16px;height:16px;border-radius:4px;background:#D9A441;transform:rotate(45deg);"></span>
+            <span style="position:absolute;top:5px;left:5px;width:16px;height:16px;border-radius:4px;background:#C43D4B;"></span>
+            <span style="position:absolute;top:5px;left:5px;width:16px;height:16px;border-radius:4px;background:#C43D4B;transform:rotate(45deg);"></span>
+            <span style="position:absolute;top:9.5px;left:12px;width:0;height:0;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;border-right:5px solid #FFFFFF;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#2B1F26;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="3d">
+      <div class="dv-olabel"><a class="dv-oid" href="#3d">3d</a>Celebration Bubble — a customer voice worth celebrating</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F7F4EF;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:66px;height:60px;">
+              <div style="position:absolute;top:8px;left:9px;width:48px;height:42px;border-radius:14px;background:#C43D4B;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #FFFFFF;margin-left:3px;"></span>
+              </div>
+              <span style="position:absolute;bottom:2px;right:16px;width:11px;height:11px;background:#C43D4B;transform:rotate(45deg);border-radius:2px;"></span>
+              <span style="position:absolute;top:0;right:2px;width:13px;height:13px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:16px;right:-3px;width:7px;height:7px;border-radius:50%;background:#D97742;"></span>
+              <span style="position:absolute;bottom:14px;left:0;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:2px;left:4px;width:6px;height:6px;border-radius:50%;background:#D97742;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2B1F26;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:66px;height:60px;">
+              <div style="position:absolute;top:8px;left:9px;width:48px;height:42px;border-radius:14px;background:#D45864;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #2B1F26;margin-left:3px;"></span>
+              </div>
+              <span style="position:absolute;bottom:2px;right:16px;width:11px;height:11px;background:#D45864;transform:rotate(45deg);border-radius:2px;"></span>
+              <span style="position:absolute;top:0;right:2px;width:13px;height:13px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:16px;right:-3px;width:7px;height:7px;border-radius:50%;background:#D97742;"></span>
+              <span style="position:absolute;bottom:14px;left:0;width:9px;height:9px;border-radius:50%;background:#D9A441;"></span>
+              <span style="position:absolute;top:2px;left:4px;width:6px;height:6px;border-radius:50%;background:#D97742;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:30px;height:27px;">
+            <div style="position:absolute;top:4px;left:4px;width:22px;height:19px;border-radius:7px;background:#C43D4B;display:flex;align-items:center;justify-content:center;">
+              <span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #FFFFFF;margin-left:1px;"></span>
+            </div>
+            <span style="position:absolute;bottom:1px;right:8px;width:6px;height:6px;background:#C43D4B;transform:rotate(45deg);border-radius:1px;"></span>
+            <span style="position:absolute;top:0;right:0;width:7px;height:7px;border-radius:50%;background:#D9A441;"></span>
+            <span style="position:absolute;bottom:5px;left:0;width:5px;height:5px;border-radius:50%;background:#D97742;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#2B1F26;">گواه</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-group">FONTS — NEW PAIRINGS (shown with the Pomegranate palette)</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="3e">
+      <div class="dv-olabel"><a class="dv-oid" href="#3e">3e</a>Estedad + Vazirmatn — bold, modern, made for Persian</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#F7F4EF;">
+        <div style="font-family:'Estedad','Vazirmatn',sans-serif;font-weight:900;font-size:25px;line-height:1.75;color:#2B1F26;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'Vazirmatn',sans-serif;font-size:13px;line-height:2.1;color:#5d4a51;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'Vazirmatn',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#C43D4B;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(43,31,38,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(43,31,38,.5);">Estedad + Vazirmatn</div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="3f">
+      <div class="dv-olabel"><a class="dv-oid" href="#3f">3f</a>Noto Naskh + IBM Plex Arabic — warm, bookish, trustworthy</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#F7F4EF;">
+        <div style="font-family:'Noto Naskh Arabic',serif;font-weight:700;font-size:26px;line-height:1.8;color:#2B1F26;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:13px;line-height:2.1;color:#5d4a51;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#C43D4B;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(43,31,38,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(43,31,38,.5);">Noto Naskh Arabic + IBM Plex Sans Arabic</div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="3g">
+      <div class="dv-olabel"><a class="dv-oid" href="#3g">3g</a>Amiri + Vazirmatn — classic, literary, high contrast</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#F7F4EF;">
+        <div style="font-family:'Amiri','Vazirmatn',serif;font-weight:700;font-size:28px;line-height:1.75;color:#2B1F26;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'Vazirmatn',sans-serif;font-size:13px;line-height:2.1;color:#5d4a51;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'Vazirmatn',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#C43D4B;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(43,31,38,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(43,31,38,.5);">Amiri + Vazirmatn</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="dv-next">Next: "apply logo <a class="dv-oid" href="#3a">3a</a> + Pomegranate + font <a class="dv-oid" href="#3e">3e</a> to the whole site" · "more color in the logos" · "more font pairings"</p>
+</section>
+
+<section class="dv-turn" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">گرم‌تر: لوگوهای جدید، پالت‌های گرم، فونت‌های تازه</span></div>
+
+  <div class="dv-group">لوگو — مسیرهای تازه</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>قاب + زیرنویس — «قاب برند دور ویدیوی مشتری»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#FAF5EE;display:flex;align-items:center;justify-content:center;">
+            <div style="width:36px;height:52px;border:3.5px solid #33241C;border-radius:11px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;padding:5px;">
+              <span style="width:100%;height:5px;border-radius:3px;background:#33241C;display:block;"></span>
+              <span style="width:60%;height:5px;border-radius:3px;background:#33241C;opacity:.35;display:block;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2a1e17;display:flex;align-items:center;justify-content:center;">
+            <div style="width:36px;height:52px;border:3.5px solid #FFFFFF;border-radius:11px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;padding:5px;">
+              <span style="width:100%;height:5px;border-radius:3px;background:#FFFFFF;display:block;"></span>
+              <span style="width:60%;height:5px;border-radius:3px;background:#FFFFFF;opacity:.4;display:block;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="width:17px;height:25px;border:2.5px solid #33241C;border-radius:6px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:1.5px;padding:2.5px;">
+            <span style="width:100%;height:2.5px;border-radius:2px;background:#33241C;display:block;"></span>
+            <span style="width:60%;height:2.5px;border-radius:2px;background:#33241C;opacity:.35;display:block;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#33241C;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2b">
+      <div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>موج صدا — «صدای واقعی مشتری»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#FAF5EE;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:4.5px;">
+              <span style="width:6px;height:14px;border-radius:4px;background:#33241C;opacity:.4;display:block;"></span>
+              <span style="width:6px;height:26px;border-radius:4px;background:#33241C;opacity:.7;display:block;"></span>
+              <span style="width:6px;height:38px;border-radius:4px;background:#33241C;display:block;"></span>
+              <span style="width:6px;height:22px;border-radius:4px;background:#33241C;opacity:.7;display:block;"></span>
+              <span style="width:6px;height:12px;border-radius:4px;background:#33241C;opacity:.4;display:block;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2a1e17;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:4.5px;">
+              <span style="width:6px;height:14px;border-radius:4px;background:#FFFFFF;opacity:.4;display:block;"></span>
+              <span style="width:6px;height:26px;border-radius:4px;background:#FFFFFF;opacity:.7;display:block;"></span>
+              <span style="width:6px;height:38px;border-radius:4px;background:#FFFFFF;display:block;"></span>
+              <span style="width:6px;height:22px;border-radius:4px;background:#FFFFFF;opacity:.7;display:block;"></span>
+              <span style="width:6px;height:12px;border-radius:4px;background:#FFFFFF;opacity:.4;display:block;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="display:flex;align-items:center;gap:2.5px;height:20px;">
+            <span style="width:3.5px;height:8px;border-radius:2px;background:#33241C;opacity:.4;display:block;"></span>
+            <span style="width:3.5px;height:13px;border-radius:2px;background:#33241C;opacity:.7;display:block;"></span>
+            <span style="width:3.5px;height:19px;border-radius:2px;background:#33241C;display:block;"></span>
+            <span style="width:3.5px;height:11px;border-radius:2px;background:#33241C;opacity:.7;display:block;"></span>
+            <span style="width:3.5px;height:7px;border-radius:2px;background:#33241C;opacity:.4;display:block;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#33241C;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2c">
+      <div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>ستاره‌ی هشت‌پر + پخش — «مهر ایرانیِ رضایت»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#FAF5EE;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:52px;display:flex;align-items:center;justify-content:center;">
+              <span style="position:absolute;width:36px;height:36px;border-radius:8px;background:#33241C;"></span>
+              <span style="position:absolute;width:36px;height:36px;border-radius:8px;background:#33241C;transform:rotate(45deg);"></span>
+              <span style="position:relative;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:11px solid #FAF5EE;margin-left:3px;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2a1e17;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:52px;display:flex;align-items:center;justify-content:center;">
+              <span style="position:absolute;width:36px;height:36px;border-radius:8px;background:#FFFFFF;"></span>
+              <span style="position:absolute;width:36px;height:36px;border-radius:8px;background:#FFFFFF;transform:rotate(45deg);"></span>
+              <span style="position:relative;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:11px solid #2a1e17;margin-left:3px;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:24px;height:24px;display:flex;align-items:center;justify-content:center;">
+            <span style="position:absolute;width:17px;height:17px;border-radius:4px;background:#33241C;"></span>
+            <span style="position:absolute;width:17px;height:17px;border-radius:4px;background:#33241C;transform:rotate(45deg);"></span>
+            <span style="position:relative;width:0;height:0;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;border-right:5px solid #FFFFFF;margin-left:1px;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#33241C;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2d">
+      <div class="dv-olabel"><a class="dv-oid" href="#2d">2d</a>قلب + پخش — «دیوارِ عشقِ مشتری‌ها»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#FAF5EE;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:48px;">
+              <span style="position:absolute;top:14px;left:11px;width:30px;height:30px;background:#33241C;transform:rotate(45deg);border-radius:5px;"></span>
+              <span style="position:absolute;top:4px;left:5px;width:22px;height:22px;border-radius:50%;background:#33241C;"></span>
+              <span style="position:absolute;top:4px;left:25px;width:22px;height:22px;border-radius:50%;background:#33241C;"></span>
+              <span style="position:absolute;top:15px;left:21px;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:9px solid #FAF5EE;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#2a1e17;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:48px;">
+              <span style="position:absolute;top:14px;left:11px;width:30px;height:30px;background:#FFFFFF;transform:rotate(45deg);border-radius:5px;"></span>
+              <span style="position:absolute;top:4px;left:5px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;"></span>
+              <span style="position:absolute;top:4px;left:25px;width:22px;height:22px;border-radius:50%;background:#FFFFFF;"></span>
+              <span style="position:absolute;top:15px;left:21px;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:9px solid #2a1e17;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:25px;height:23px;">
+            <span style="position:absolute;top:7px;left:5.5px;width:14px;height:14px;background:#33241C;transform:rotate(45deg);border-radius:2.5px;"></span>
+            <span style="position:absolute;top:2px;left:2.5px;width:10.5px;height:10.5px;border-radius:50%;background:#33241C;"></span>
+            <span style="position:absolute;top:2px;left:12px;width:10.5px;height:10.5px;border-radius:50%;background:#33241C;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#33241C;">گواه</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-group">پالت — همه گرم</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="2e">
+      <div class="dv-olabel"><a class="dv-oid" href="#2e">2e</a>خشت — خاکی، دست‌ساز، صمیمی</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#FAF3EC;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(51,36,28,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#BE5535;"></span><span style="font-size:13px;font-weight:800;color:#33241C;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#BE5535;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#33241C;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#33241C;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #33241C;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#D9A441;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(51,36,28,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#D9A441;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#33241C;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#93837a;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#33241C;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#BE5535;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#D9A441;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#FAF3EC;border:1px solid rgba(51,36,28,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(51,36,28,.5);margin-right:auto;">#33241C · #BE5535 · #D9A441</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2f">
+      <div class="dv-olabel"><a class="dv-oid" href="#2f">2f</a>زعفران — طلایی، اصیل، خوش‌بین</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#FBF6EA;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(44,36,22,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#A96A0A;"></span><span style="font-size:13px;font-weight:800;color:#2C2416;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#A96A0A;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#2C2416;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#2C2416;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #2C2416;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#E0A93E;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(44,36,22,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#B3552F;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#2C2416;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#8f8471;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#2C2416;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#A96A0A;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#B3552F;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#FBF6EA;border:1px solid rgba(44,36,22,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(44,36,22,.5);margin-right:auto;">#2C2416 · #A96A0A · #B3552F</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2g">
+      <div class="dv-olabel"><a class="dv-oid" href="#2g">2g</a>مس و زیتون — گرم اما جاافتاده</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#F7F4EB;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(44,43,31,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#AF5F36;"></span><span style="font-size:13px;font-weight:800;color:#2C2B1F;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#AF5F36;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#2C2B1F;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#2C2B1F;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #2C2B1F;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#C98E3F;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(44,43,31,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#C98E3F;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#2C2B1F;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#8b897b;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#2C2B1F;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#AF5F36;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#C98E3F;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#F7F4EB;border:1px solid rgba(44,43,31,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(44,43,31,.5);margin-right:auto;">#2C2B1F · #AF5F36 · #C98E3F</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2h">
+      <div class="dv-olabel"><a class="dv-oid" href="#2h">2h</a>گل‌انار — گرم و رمانتیک، برای برندهای زنانه‌تر</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#FAF0ED;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(58,32,40,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#B03A48;"></span><span style="font-size:13px;font-weight:800;color:#3A2028;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#B03A48;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#3A2028;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#3A2028;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #3A2028;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#D98E4F;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(58,32,40,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#D98E4F;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#3A2028;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#95808a;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#3A2028;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#B03A48;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#D98E4F;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#FAF0ED;border:1px solid rgba(58,32,40,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(58,32,40,.5);margin-right:auto;">#3A2028 · #B03A48 · #D98E4F</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-group">فونت — تیتر + متن</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="2i">
+      <div class="dv-olabel"><a class="dv-oid" href="#2i">2i</a>لاله‌زار + وزیرمتن — پوستری و پرانرژی</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#FAF5EE;">
+        <div style="font-family:'Lalezar',sans-serif;font-size:30px;line-height:1.5;color:#33241C;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'Vazirmatn',sans-serif;font-size:13px;line-height:2.1;color:#5d4d42;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'Vazirmatn',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#BE5535;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(51,36,28,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(51,36,28,.5);">Lalezar + Vazirmatn</div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2j">
+      <div class="dv-olabel"><a class="dv-oid" href="#2j">2j</a>مرکزی + وزیرمتن — ادیتوریال و گرم</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#FAF5EE;">
+        <div style="font-family:'Markazi Text',serif;font-weight:700;font-size:31px;line-height:1.55;color:#33241C;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'Vazirmatn',sans-serif;font-size:13px;line-height:2.1;color:#5d4d42;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'Vazirmatn',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#BE5535;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(51,36,28,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(51,36,28,.5);">Markazi Text + Vazirmatn</div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2k">
+      <div class="dv-olabel"><a class="dv-oid" href="#2k">2k</a>کوفی نوتو + پلکس عربی — هندسی و مدرن</div>
+      <div class="dv-card" dir="rtl" style="width:340px;padding:24px 22px;background:#FAF5EE;">
+        <div style="font-family:'Noto Kufi Arabic',sans-serif;font-weight:800;font-size:24px;line-height:1.8;color:#33241C;">نظر مشتری‌هات، قوی‌ترین ابزار فروشت</div>
+        <p style="margin:12px 0 18px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:13px;line-height:2.1;color:#5d4d42;">مشتری با گوشی خودش ضبط می‌کند؛ گواه زیرنویس و قاب برند شما را اضافه می‌کند.</p>
+        <span style="display:inline-block;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:700;color:#FFFFFF;background:#BE5535;border-radius:9px;padding:8px 18px;">رایگان شروع کن</span>
+        <div dir="ltr" style="margin-top:18px;padding-top:12px;border-top:1px solid rgba(51,36,28,.1);font-family:ui-monospace,monospace;font-size:9.5px;color:rgba(51,36,28,.5);">Noto Kufi Arabic + IBM Plex Sans Arabic</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="dv-next">قدم بعدی: «لوگوی <a class="dv-oid" href="#2c">2c</a> + پالت <a class="dv-oid" href="#2e">2e</a> + فونت <a class="dv-oid" href="#2i">2i</a> را روی کل سایت اعمال کن» · «از <a class="dv-oid" href="#2b">2b</a> چند حالت رنگی بساز» · «باز هم پالت گرم»</p>
+</section>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">لوگو (بر اساس کاری که گواه می‌کند) + چهار مسیر رنگی</span></div>
+
+  <div class="dv-group">لوگو — روی روشن و تیره</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>حباب گفتار + پخش — «مشتری خودش حرف می‌زند»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F6F5F1;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:52px;">
+              <div style="width:48px;height:44px;border-radius:14px;background:#1a2233;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #F6F5F1;margin-left:3px;"></span>
+              </div>
+              <div style="position:absolute;bottom:2px;right:9px;width:11px;height:11px;background:#1a2233;transform:rotate(45deg);border-radius:2px;"></div>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#161d2e;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:52px;height:52px;">
+              <div style="width:48px;height:44px;border-radius:14px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:13px solid #161d2e;margin-left:3px;"></span>
+              </div>
+              <div style="position:absolute;bottom:2px;right:9px;width:11px;height:11px;background:#FFFFFF;transform:rotate(45deg);border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:26px;height:26px;">
+            <div style="width:24px;height:22px;border-radius:7px;background:#1a2233;display:flex;align-items:center;justify-content:center;">
+              <span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #FFFFFF;margin-left:1px;"></span>
+            </div>
+            <div style="position:absolute;bottom:1px;right:4px;width:6px;height:6px;background:#1a2233;transform:rotate(45deg);border-radius:1px;"></div>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#1a2233;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>زیرنویس کلمه‌به‌کلمه — «جادوی محصول»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F6F5F1;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;flex-direction:column;gap:7px;align-items:flex-end;">
+              <span style="width:42px;height:9px;border-radius:5px;background:#1a2233;display:block;"></span>
+              <span style="display:flex;gap:5px;">
+                <span style="width:16px;height:9px;border-radius:5px;background:#1a2233;opacity:.3;display:block;"></span>
+                <span style="width:22px;height:9px;border-radius:5px;background:#1a2233;display:block;"></span>
+              </span>
+              <span style="width:30px;height:9px;border-radius:5px;background:#1a2233;opacity:.3;display:block;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#161d2e;display:flex;align-items:center;justify-content:center;">
+            <div style="display:flex;flex-direction:column;gap:7px;align-items:flex-end;">
+              <span style="width:42px;height:9px;border-radius:5px;background:#FFFFFF;display:block;"></span>
+              <span style="display:flex;gap:5px;">
+                <span style="width:16px;height:9px;border-radius:5px;background:#FFFFFF;opacity:.35;display:block;"></span>
+                <span style="width:22px;height:9px;border-radius:5px;background:#FFFFFF;display:block;"></span>
+              </span>
+              <span style="width:30px;height:9px;border-radius:5px;background:#FFFFFF;opacity:.35;display:block;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="display:flex;flex-direction:column;gap:3.5px;align-items:flex-end;width:24px;">
+            <span style="width:22px;height:5px;border-radius:3px;background:#1a2233;display:block;"></span>
+            <span style="display:flex;gap:2.5px;">
+              <span style="width:8px;height:5px;border-radius:3px;background:#1a2233;opacity:.3;display:block;"></span>
+              <span style="width:11px;height:5px;border-radius:3px;background:#1a2233;display:block;"></span>
+            </span>
+            <span style="width:15px;height:5px;border-radius:3px;background:#1a2233;opacity:.3;display:block;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#1a2233;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>ویدیوی پنج‌ستاره — «رضایتِ قابل پخش»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F6F5F1;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:56px;height:56px;">
+              <div style="width:48px;height:48px;border-radius:50%;border:3.5px solid #1a2233;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #1a2233;margin-left:3px;"></span>
+              </div>
+              <span style="position:absolute;top:-4px;right:-4px;font-size:17px;line-height:1;color:#1a2233;">★</span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#161d2e;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;width:56px;height:56px;">
+              <div style="width:48px;height:48px;border-radius:50%;border:3.5px solid #FFFFFF;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:12px solid #FFFFFF;margin-left:3px;"></span>
+              </div>
+              <span style="position:absolute;top:-4px;right:-4px;font-size:17px;line-height:1;color:#FFFFFF;">★</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="position:relative;width:26px;height:26px;">
+            <div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1a2233;display:flex;align-items:center;justify-content:center;">
+              <span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #1a2233;margin-left:1px;"></span>
+            </div>
+            <span style="position:absolute;top:-3px;right:-2px;font-size:9px;line-height:1;color:#1a2233;">★</span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#1a2233;">گواه</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1d">
+      <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>دیوار افتخار — «همه‌ی رضایت‌ها کنار هم»</div>
+      <div class="dv-card" dir="rtl">
+        <div style="display:flex;">
+          <div style="width:160px;height:120px;background:#F6F5F1;display:flex;align-items:center;justify-content:center;">
+            <div style="display:grid;grid-template-columns:22px 22px;gap:6px;">
+              <span style="height:22px;border-radius:7px;background:#1a2233;opacity:.22;display:block;"></span>
+              <span style="height:22px;border-radius:7px;background:#1a2233;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #F6F5F1;margin-left:1px;"></span>
+              </span>
+              <span style="height:22px;border-radius:7px;background:#1a2233;opacity:.45;display:block;"></span>
+              <span style="height:22px;border-radius:7px;background:#1a2233;opacity:.22;display:block;"></span>
+            </div>
+          </div>
+          <div style="width:160px;height:120px;background:#161d2e;display:flex;align-items:center;justify-content:center;">
+            <div style="display:grid;grid-template-columns:22px 22px;gap:6px;">
+              <span style="height:22px;border-radius:7px;background:#FFFFFF;opacity:.25;display:block;"></span>
+              <span style="height:22px;border-radius:7px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;">
+                <span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #161d2e;margin-left:1px;"></span>
+              </span>
+              <span style="height:22px;border-radius:7px;background:#FFFFFF;opacity:.5;display:block;"></span>
+              <span style="height:22px;border-radius:7px;background:#FFFFFF;opacity:.25;display:block;"></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;padding:14px 18px;border-top:1px solid rgba(0,0,0,.07);">
+          <div style="display:grid;grid-template-columns:11px 11px;gap:3px;">
+            <span style="height:11px;border-radius:3.5px;background:#1a2233;opacity:.22;display:block;"></span>
+            <span style="height:11px;border-radius:3.5px;background:#1a2233;display:flex;align-items:center;justify-content:center;">
+              <span style="width:0;height:0;border-top:2.5px solid transparent;border-bottom:2.5px solid transparent;border-right:3.5px solid #FFFFFF;"></span>
+            </span>
+            <span style="height:11px;border-radius:3.5px;background:#1a2233;opacity:.45;display:block;"></span>
+            <span style="height:11px;border-radius:3.5px;background:#1a2233;opacity:.22;display:block;"></span>
+          </div>
+          <span style="font-size:17px;font-weight:800;color:#1a2233;">گواه</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv-group">پالت رنگی — همان صفحه، چهار حال‌وهوا</div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1e">
+      <div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>انار — گرم، جسور، اینستاگرامی</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#F7F4EF;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(43,31,38,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#C43D4B;"></span><span style="font-size:13px;font-weight:800;color:#2B1F26;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#C43D4B;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#2B1F26;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#2B1F26;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #2B1F26;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#D9A441;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(43,31,38,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#D9A441;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#2B1F26;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#8b7a80;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#2B1F26;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#C43D4B;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#D9A441;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#F7F4EF;border:1px solid rgba(43,31,38,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(43,31,38,.5);margin-right:auto;">#2B1F26 · #C43D4B · #D9A441</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1f">
+      <div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>سرو — آرام، قابل‌اعتماد، طبیعی</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#F4F3EE;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(30,42,35,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#2F7D5B;"></span><span style="font-size:13px;font-weight:800;color:#1E2A23;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#2F7D5B;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#1E2A23;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#1E2A23;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #1E2A23;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#D08C4A;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(30,42,35,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#D08C4A;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#1E2A23;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#7d857f;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#1E2A23;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#2F7D5B;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#D08C4A;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#F4F3EE;border:1px solid rgba(30,42,35,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(30,42,35,.5);margin-right:auto;">#1E2A23 · #2F7D5B · #D08C4A</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1g">
+      <div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>لاجورد — جدی، کلاسیک، کاشی‌کاری</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#F2F4F7;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(19,28,51,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#2E5EBF;"></span><span style="font-size:13px;font-weight:800;color:#131C33;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#2E5EBF;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#131C33;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#131C33;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #131C33;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#C6763C;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(19,28,51,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#C6763C;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#131C33;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#7b8292;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#131C33;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#2E5EBF;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#C6763C;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#F2F4F7;border:1px solid rgba(19,28,51,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(19,28,51,.5);margin-right:auto;">#131C33 · #2E5EBF · #C6763C</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1h">
+      <div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>فیروزه‌ی گرم — نسخه‌ی پخته‌ترِ پالت فعلی</div>
+      <div class="dv-card" dir="rtl" style="width:340px;background:#F6F4EE;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(24,35,33,.08);">
+          <span style="display:flex;align-items:center;gap:7px;"><span style="width:18px;height:18px;border-radius:6px;background:#0E7C6B;"></span><span style="font-size:13px;font-weight:800;color:#182321;">گواه</span></span>
+          <span style="font-size:11px;font-weight:700;color:#FFFFFF;background:#0E7C6B;border-radius:8px;padding:5px 12px;">رایگان شروع کن</span>
+        </div>
+        <div style="padding:22px 18px 18px;">
+          <div style="font-size:18px;font-weight:900;line-height:1.7;color:#182321;">نظر مشتری‌هات را به قوی‌ترین ابزار فروشت تبدیل کن</div>
+          <div style="margin-top:14px;display:flex;gap:10px;">
+            <div style="flex:1.1;background:#182321;border-radius:12px;padding:12px;position:relative;min-height:96px;">
+              <span style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:6px solid #182321;"></span></span>
+              <div style="position:absolute;bottom:10px;right:12px;left:12px;font-size:10px;font-weight:800;color:#FFFFFF;">«بهترین <span style="color:#C97F45;">قهوه‌ای</span> که خوردم»</div>
+            </div>
+            <div style="flex:1;background:#FFFFFF;border:1px solid rgba(24,35,33,.1);border-radius:12px;padding:12px;">
+              <div style="font-size:9px;color:#C97F45;letter-spacing:1.5px;">★★★★★</div>
+              <div style="margin-top:6px;font-size:10px;line-height:1.9;color:#182321;">فرقش را در فروش می‌بینم.</div>
+              <div style="margin-top:8px;font-size:9px;color:#7f8683;">امیر رضایی</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 18px 16px;align-items:center;">
+          <span style="width:26px;height:26px;border-radius:50%;background:#182321;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#0E7C6B;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#C97F45;"></span>
+          <span style="width:26px;height:26px;border-radius:50%;background:#F6F4EE;border:1px solid rgba(24,35,33,.15);"></span>
+          <span dir="ltr" style="font-family:ui-monospace,monospace;font-size:9px;color:rgba(24,35,33,.5);margin-right:auto;">#182321 · #0E7C6B · #C97F45</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="dv-next">قدم بعدی: «لوگوی <a class="dv-oid" href="#1b">1b</a> و پالت <a class="dv-oid" href="#1e">1e</a> را روی کل سایت اعمال کن» · «از <a class="dv-oid" href="#1a">1a</a> چند حالت دیگر بساز» · «چند مسیر رنگی جدید»</p>
+</section>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&amp;family=Estedad:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#FAF0ED;}
+body{font-family:'Vazirmatn',ui-sans-serif,system-ui,sans-serif;}
+*{box-sizing:border-box;}
+h1,h2,h3{font-family:'Estedad','Vazirmatn',sans-serif;}
+a{color:#B03A48;text-decoration:none;}
+a:hover{color:#8E2E3A;}
+button,input{font-family:inherit;}
+a:focus-visible,button:focus-visible{outline:3px solid #B03A48;outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</helmet>
+<div dir="rtl" lang="fa" style="background:#FAF0ED;color:#3A2028;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+
+  <a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;margin-bottom:28px;">
+    <span style="position:relative;display:block;flex-shrink:0;width:41.5px;height:36px;"><span style="position:absolute;top:3.5px;left:1px;width:21px;height:29.5px;border-radius:6px;background:#D98E4F;transform:rotate(-14deg);"></span><span style="position:absolute;top:2px;left:7px;width:21px;height:29.5px;border-radius:6px;background:#B03A48;transform:rotate(-4deg);"></span><span style="position:absolute;top:1px;left:13.5px;width:21px;height:31px;border-radius:6px;background:#3A2028;transform:rotate(7deg);display:flex;align-items:center;justify-content:center;"><span style="font-family:'Estedad',sans-serif;font-weight:900;font-size:15px;line-height:1;color:#FFFFFF;padding-bottom:2.5px;">«</span></span></span>
+    <span style="font-family:'Estedad','Vazirmatn',sans-serif;font-size:24px;font-weight:900;color:#3A2028;">گواه</span>
+  </a>
+
+  <div data-screen-label="کارت ثبت‌نام" style="width:min(400px,100%);background:#FFFFFF;border:1px solid #F0DBD4;border-radius:20px;padding:36px 32px;box-shadow:0 14px 40px rgba(58,32,40,.08);">
+    <h1 style="margin:0 0 26px;font-size:23px;font-weight:800;line-height:1.7;color:#3A2028;text-align:center;">حساب رایگانت را بساز</h1>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <label style="display:flex;flex-direction:column;gap:7px;">
+        <span style="font-size:13.5px;font-weight:700;color:#5D4A51;">نام</span>
+        <input type="text" value="{{ name }}" onChange="{{ setName }}" style="width:100%;border:1.5px solid #F0DBD4;border-radius:11px;padding:12px 14px;font-size:15px;color:#3A2028;background:#F9FBFA;outline:none;" style-focus="border-color:#B03A48;background:#FFFFFF;">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:7px;">
+        <span style="font-size:13.5px;font-weight:700;color:#5D4A51;">ایمیل</span>
+        <input type="email" dir="ltr" value="{{ email }}" onChange="{{ setEmail }}" style="width:100%;border:1.5px solid #F0DBD4;border-radius:11px;padding:12px 14px;font-size:15px;color:#3A2028;background:#F9FBFA;outline:none;text-align:left;" style-focus="border-color:#B03A48;background:#FFFFFF;">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:7px;">
+        <span style="font-size:13.5px;font-weight:700;color:#5D4A51;">رمز عبور</span>
+        <input type="password" dir="ltr" value="{{ password }}" onChange="{{ setPassword }}" style="width:100%;border:1.5px solid #F0DBD4;border-radius:11px;padding:12px 14px;font-size:15px;color:#3A2028;background:#F9FBFA;outline:none;text-align:left;" style-focus="border-color:#B03A48;background:#FFFFFF;">
+      </label>
+      <button onClick="{{ submit }}" style="margin-top:6px;width:100%;background:#B03A48;border:none;border-radius:12px;padding:14px;font-size:16px;font-weight:800;color:#FFFFFF;cursor:pointer;" style-hover="background:#8E2E3A;">شروع کن</button>
+      <div style="text-align:center;font-size:12.5px;color:#9B8288;">بدون کارت بانکی</div>
+    </div>
+    <div style="margin-top:22px;padding-top:20px;border-top:1px solid #F0DBD4;text-align:center;font-size:14px;color:#5D4A51;">حساب داری؟ <a href="Login.dc.html" style="font-weight:700;color:#8E2E3A;" style-hover="color:#3A2028;">وارد شو</a></div>
+  </div>
+
+  <div style="margin-top:26px;display:flex;align-items:center;gap:10px;max-width:400px;">
+    <span style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#B03A48;color:#FFFFFF;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;">ن</span>
+    <p style="margin:0;font-size:13px;line-height:1.9;color:#9B8288;">«راه‌اندازی‌اش واقعاً پنج دقیقه بود.» — نگار کریمی، مشاور برندینگ</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { name: '', email: '', password: '' };
+
+  renderVals() {
+    return {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setEmail: (e) => this.setState({ email: e.target.value }),
+      setPassword: (e) => this.setState({ password: e.target.value }),
+      submit: () => {},
+    };
+  }
+}
+</script>
+</body>
+</html>
