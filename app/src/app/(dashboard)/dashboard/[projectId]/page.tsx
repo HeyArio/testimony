@@ -16,9 +16,18 @@ export default async function ProjectPage({ params }: { params: { projectId: str
   const user = await requireUser();
   const project = await db.project.findUnique({
     where: { id: params.projectId },
-    include: { testimonials: { orderBy: { createdAt: "desc" } } },
+    include: {
+      testimonials: {
+        orderBy: { createdAt: "desc" },
+        include: { jobs: { orderBy: { createdAt: "desc" } } },
+      },
+    },
   });
   if (!project || project.userId !== user.id) notFound();
+
+  // A processing step counts as failed when its most recent job failed.
+  const latestFailed = (jobs: { kind: string; status: string }[], kind: string) =>
+    jobs.find((j) => j.kind === kind)?.status === "failed";
 
   // Pending first, then newest.
   const testimonials = [...project.testimonials].sort(
@@ -66,8 +75,10 @@ export default async function ProjectPage({ params }: { params: { projectId: str
       <div className="flex flex-col gap-4">
         {testimonials.map((t) => (
           <TestimonialCard
+            clipFailed={latestFailed(t.jobs, "render_clip")}
             clipUrl={t.clipKey ? publicUrl(t.clipKey) : null}
             key={t.id}
+            transcribeFailed={latestFailed(t.jobs, "transcribe")}
             testimonial={{
               id: t.id,
               type: t.type,

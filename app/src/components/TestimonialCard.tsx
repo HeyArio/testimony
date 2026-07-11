@@ -18,6 +18,8 @@ type Props = {
   };
   videoUrl: string | null;
   clipUrl: string | null;
+  transcribeFailed: boolean;
+  clipFailed: boolean;
 };
 
 const STATUS_STYLE: Record<string, string> = {
@@ -26,7 +28,7 @@ const STATUS_STYLE: Record<string, string> = {
   rejected: "bg-ink/10 text-ink/60",
 };
 
-export function TestimonialCard({ testimonial: t, videoUrl, clipUrl }: Props) {
+export function TestimonialCard({ testimonial: t, videoUrl, clipUrl, transcribeFailed, clipFailed }: Props) {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(t.text ?? "");
@@ -41,6 +43,28 @@ export function TestimonialCard({ testimonial: t, videoUrl, clipUrl }: Props) {
     });
     setBusy(false);
     router.refresh();
+  }
+
+  async function retry(kind: "transcribe" | "render_clip") {
+    setBusy(true);
+    await fetch(`/api/testimonials/${t.id}/retry`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind }),
+    });
+    setBusy(false);
+    router.refresh();
+  }
+
+  function RetryNote({ label, kind }: { label: string; kind: "transcribe" | "render_clip" }) {
+    return (
+      <span className="flex items-center gap-2 text-sm">
+        <span className="font-bold text-primary">{label}</span>
+        <button className="btn-ghost !px-3 !py-1 text-xs" disabled={busy} onClick={() => retry(kind)} type="button">
+          ↻ {fa.inbox.retry}
+        </button>
+      </span>
+    );
   }
 
   const statusLabel: Record<string, string> = {
@@ -68,9 +92,14 @@ export function TestimonialCard({ testimonial: t, videoUrl, clipUrl }: Props) {
         <video className="max-h-72 w-full rounded-card bg-ink" controls preload="metadata" src={videoUrl} />
       )}
 
-      {t.type === "video" && !t.text && !t.hasTranscript && (
-        <p className="text-sm text-ink/60">{fa.inbox.transcriptPending}</p>
-      )}
+      {t.type === "video" &&
+        !t.text &&
+        !t.hasTranscript &&
+        (transcribeFailed ? (
+          <RetryNote kind="transcribe" label={fa.inbox.transcriptFailed} />
+        ) : (
+          <p className="text-sm text-ink/60">{fa.inbox.transcriptPending}</p>
+        ))}
 
       {editing ? (
         <div className="flex flex-col gap-2">
@@ -123,7 +152,9 @@ export function TestimonialCard({ testimonial: t, videoUrl, clipUrl }: Props) {
             <a className="btn-ghost !py-1.5 text-sm" download href={clipUrl}>
               {fa.inbox.downloadClip}
             </a>
-          ) : (
+          ) : clipFailed ? (
+            <RetryNote kind="render_clip" label={fa.inbox.clipFailed} />
+          ) : transcribeFailed ? null : (
             <span className="text-sm text-ink/50">{fa.inbox.clipPending}</span>
           ))}
       </div>

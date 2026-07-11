@@ -2,14 +2,12 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
-import { presignPut } from "@/lib/r2";
+import { MAX_VIDEO_BYTES, presignPut } from "@/lib/r2";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { testimonialCapReached } from "@/lib/plan";
 
 // Public endpoint: presigns a direct-to-R2 PUT for the recorded video.
 // Keys are server-generated UUIDs; content type and size are validated here.
-
-const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
 
 const bodySchema = z.object({
   contentType: z.enum(["video/webm", "video/mp4"]),

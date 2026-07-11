@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { testimonialCapReached } from "@/lib/plan";
+import { headObject, MAX_VIDEO_BYTES } from "@/lib/r2";
 import { fa } from "@/i18n/fa";
 
 // Public endpoint: creates a pending testimonial after the (optional) video
@@ -36,6 +37,15 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
   const d = parsed.data;
+  if (d.type === "video") {
+    // Don't trust the client that the presigned PUT actually happened — a
+    // well-formed key for a missing/oversized object would just fail later
+    // in the worker.
+    const head = await headObject(d.videoKey);
+    if (!head || head.size === 0 || head.size > MAX_VIDEO_BYTES) {
+      return NextResponse.json({ error: "invalid_input" }, { status: 400 });
+    }
+  }
   const testimonial = await db.testimonial.create({
     data: {
       projectId: project.id,
