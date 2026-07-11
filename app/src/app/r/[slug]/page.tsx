@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { testimonialCapReached } from "@/lib/plan";
 import { fa } from "@/i18n/fa";
+import { projectQuestions } from "@/lib/questions";
 import { CollectClient } from "@/components/collect/CollectClient";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +36,7 @@ export default async function CollectPage({ params }: { params: { slug: string }
           <div className="card">
             <p className="mb-2 font-bold">{fa.collect.questionsTitle}</p>
             <ul className="list-inside list-disc space-y-1 text-sm text-ink/80">
-              {fa.collect.questions.map((q) => (
+              {projectQuestions(project.questionsJson).map((q) => (
                 <li key={q}>{q}</li>
               ))}
             </ul>

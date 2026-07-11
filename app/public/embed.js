@@ -2,6 +2,7 @@
  * Usage:
  *   <script src="https://DOMAIN/embed.js" async></script>
  *   <div data-gavah-wall="your-slug"></div>
+ *   <div data-gavah-wall="your-slug" data-gavah-layout="carousel"></div>
  * Injects an iframe per div and auto-resizes it via postMessage.
  * Vanilla JS, no dependencies — keep under 4KB.
  */
@@ -22,8 +23,9 @@
     if (!slug || !/^[a-z0-9-]{3,32}$/.test(slug)) return;
     el.setAttribute("data-gavah-mounted", "1");
 
+    var layout = el.getAttribute("data-gavah-layout") === "carousel" ? "/carousel" : "";
     var frame = document.createElement("iframe");
-    frame.src = origin + "/w/" + encodeURIComponent(slug);
+    frame.src = origin + "/w/" + encodeURIComponent(slug) + layout;
     frame.title = "Gavah wall";
     frame.loading = "lazy";
     frame.style.width = "100%";

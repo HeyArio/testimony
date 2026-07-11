@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { fa } from "@/i18n/fa";
+import { customQuestions } from "@/lib/questions";
 import { BrandSettingsForm } from "@/components/BrandSettingsForm";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,7 @@ export default async function SettingsPage({ params }: { params: { projectId: st
           name: project.name,
           brandColor: project.brandColor,
           logoUrl: project.logoUrl,
+          questions: customQuestions(project.questionsJson),
         }}
       />
     </div>

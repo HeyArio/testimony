@@ -8,6 +8,7 @@ import { appUrl } from "@/config/brand";
 import { fa } from "@/i18n/fa";
 import { faDigits } from "@/lib/format";
 import { CopySnippet } from "@/components/CopySnippet";
+import { ManualAddForm } from "@/components/ManualAddForm";
 import { TestimonialCard } from "@/components/TestimonialCard";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +38,7 @@ export default async function ProjectPage({ params }: { params: { projectId: str
   const collectUrl = `${base}/r/${project.slug}`;
   const wallUrl = `${base}/wall/${project.slug}`;
   const embedCode = `<script src="${base}/embed.js" async></script>\n<div data-gavah-wall="${project.slug}"></div>`;
+  const embedCarouselCode = `<script src="${base}/embed.js" async></script>\n<div data-gavah-wall="${project.slug}" data-gavah-layout="carousel"></div>`;
   const count = project.testimonials.length;
   const isFree = project.plan !== "pro";
 
@@ -62,6 +64,10 @@ export default async function ProjectPage({ params }: { params: { projectId: str
           <p className="label">{fa.inbox.embedTitle}</p>
           <CopySnippet multiline text={embedCode} />
         </div>
+        <div>
+          <p className="label">{fa.inbox.embedCarouselTitle}</p>
+          <CopySnippet multiline text={embedCarouselCode} />
+        </div>
       </div>
 
       {isFree && (
@@ -70,7 +76,10 @@ export default async function ProjectPage({ params }: { params: { projectId: str
         </p>
       )}
 
-      <h2 className="text-xl font-black">{fa.inbox.title}</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-xl font-black">{fa.inbox.title}</h2>
+      </div>
+      <ManualAddForm projectId={project.id} />
       {testimonials.length === 0 && <p className="text-ink/70">{fa.inbox.empty}</p>}
       <div className="flex flex-col gap-4">
         {testimonials.map((t) => (

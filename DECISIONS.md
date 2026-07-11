@@ -30,3 +30,11 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   flag; plans are flipped manually via `npx prisma studio`.
 - **Design mockups moved to `design/mockups/`** so the repo root matches the
   layout in CLAUDE.md.
+- **Marketing site implemented from the mockups** (Home, Pricing, /demo) in a
+  `(marketing)` route group. Blog nav item omitted until there is content —
+  no dead links. Sample-wall/demo content lives in `fa.ts` like all copy.
+- **Manually added testimonials are text-only and created `approved`** (the
+  owner is the moderator); consentText records that the owner added it.
+  They count toward the free cap like any other testimonial.
+- **Embed layouts are path segments** (`/w/[slug]` wall, `/w/[slug]/carousel`)
+  rather than query params, so ISR caching keeps working per layout.

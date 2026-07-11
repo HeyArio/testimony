@@ -37,6 +37,7 @@ model Project {
   slug         String        @unique
   brandColor   String        @default("#B03A48")
   logoUrl      String?
+  questionsJson String? // JSON array of custom guiding questions (falls back to defaults)
   plan         String        @default("free") // "free" | "pro"
   createdAt    DateTime      @default(now())
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)

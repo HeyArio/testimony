@@ -12,6 +12,7 @@ const updateSchema = z.object({
     .regex(/^#[0-9a-fA-F]{6}$/)
     .optional(),
   logoUrl: z.string().url().max(500).nullable().optional(),
+  questions: z.array(z.string().trim().min(1).max(120)).max(5).optional(),
 });
 
 async function ownedProject(id: string) {
@@ -35,7 +36,15 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   if (parsed.data.logoUrl && (!base || !parsed.data.logoUrl.startsWith(base))) {
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
-  await db.project.update({ where: { id: project.id }, data: parsed.data });
+  const { questions, ...rest } = parsed.data;
+  await db.project.update({
+    where: { id: project.id },
+    data: {
+      ...rest,
+      // Empty list clears custom questions → collection page falls back to defaults.
+      ...(questions !== undefined && { questionsJson: questions.length ? JSON.stringify(questions) : null }),
+    },
+  });
   // A replaced or removed logo is orphaned in R2 — clean it up.
   if (parsed.data.logoUrl !== undefined && project.logoUrl && project.logoUrl !== parsed.data.logoUrl) {
     const oldKey = keyFromPublicUrl(project.logoUrl);

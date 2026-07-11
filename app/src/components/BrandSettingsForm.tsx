@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { fa } from "@/i18n/fa";
 
 type Props = {
-  project: { id: string; name: string; brandColor: string; logoUrl: string | null };
+  project: { id: string; name: string; brandColor: string; logoUrl: string | null; questions: string[] };
 };
 
 export function BrandSettingsForm({ project }: Props) {
@@ -13,6 +13,7 @@ export function BrandSettingsForm({ project }: Props) {
   const [name, setName] = useState(project.name);
   const [color, setColor] = useState(project.brandColor);
   const [logoUrl, setLogoUrl] = useState(project.logoUrl);
+  const [questionsText, setQuestionsText] = useState(project.questions.join("\n"));
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,10 +22,15 @@ export function BrandSettingsForm({ project }: Props) {
     setBusy(true);
     setSaved(false);
     setError(null);
+    const questions = questionsText
+      .split("\n")
+      .map((q) => q.trim())
+      .filter(Boolean)
+      .slice(0, 5);
     const res = await fetch(`/api/projects/${project.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, brandColor: color, ...extra }),
+      body: JSON.stringify({ name, brandColor: color, questions, ...extra }),
     });
     setBusy(false);
     if (!res.ok) {
@@ -83,6 +89,19 @@ export function BrandSettingsForm({ project }: Props) {
           />
           <code dir="ltr">{color}</code>
         </div>
+      </div>
+      <div>
+        <label className="label" htmlFor="s-questions">
+          {fa.settings.questions}
+        </label>
+        <textarea
+          className="input min-h-24"
+          id="s-questions"
+          onChange={(e) => setQuestionsText(e.target.value)}
+          placeholder={fa.collect.questions.join("\n")}
+          value={questionsText}
+        />
+        <p className="mt-1 text-xs text-ink/60">{fa.settings.questionsHint}</p>
       </div>
       <div>
         <p className="label">{fa.settings.logo}</p>
