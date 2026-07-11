@@ -1,0 +1,82 @@
+// SQLite for MVP. No SQLite-only features — moving to Postgres later must be
+// a connection-string change, so enums are plain strings and IDs are UUIDs.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime  @default(now())
+  projects     Project[]
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Project {
+  id           String        @id @default(uuid())
+  userId       String
+  name         String
+  slug         String        @unique
+  brandColor   String        @default("#B03A48")
+  logoUrl      String?
+  plan         String        @default("free") // "free" | "pro"
+  createdAt    DateTime      @default(now())
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  testimonials Testimonial[]
+
+  @@index([userId])
+}
+
+model Testimonial {
+  id             String   @id @default(uuid())
+  projectId      String
+  type           String // "video" | "text"
+  status         String   @default("pending") // "pending" | "approved" | "rejected"
+  authorName     String
+  authorRole     String?
+  rating         Int?
+  text           String? // text testimonial body, or (edited) transcript for video
+  videoKey       String? // R2 key of the raw upload
+  thumbKey       String? // R2 key of the poster jpg
+  transcriptJson String? // faster-whisper word-level output (JSON string)
+  clipKey        String? // R2 key of the rendered vertical MP4
+  consentText    String
+  consentAt      DateTime
+  createdAt      DateTime @default(now())
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  jobs           Job[]
+
+  @@index([projectId, status])
+}
+
+model Job {
+  id            String      @id @default(uuid())
+  testimonialId String
+  kind          String // "transcribe" | "render_clip"
+  status        String      @default("queued") // "queued" | "running" | "done" | "failed"
+  error         String?
+  attempts      Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  testimonial   Testimonial @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+}

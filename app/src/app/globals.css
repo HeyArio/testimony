@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-porcelain text-ink font-sans;
+  line-height: 1.75; /* Persian needs >= 1.75 */
+}
+
+@layer components {
+  .card {
+    @apply bg-card rounded-card border border-hairline p-5;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-card bg-primary px-5 py-2.5 font-bold text-white transition-colors hover:bg-primary-dark disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-card border border-hairline bg-card px-5 py-2.5 font-bold text-ink transition-colors hover:border-primary hover:text-primary disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .input {
+    @apply w-full rounded-card border border-hairline bg-card px-4 py-2.5 text-ink outline-none focus:border-primary;
+  }
+  .label {
+    @apply mb-1 block text-sm font-bold;
+  }
+}

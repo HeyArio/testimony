@@ -1,0 +1,26 @@
+# deps / builds
+node_modules/
+app/.next/
+app/out/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+app/.env
+app/.env.*
+!app/.env.example
+
+# local databases
+*.db
+*.db-journal
+app/prisma/dev.db*
+
+# worker
+__pycache__/
+*.pyc
+worker/tmp/
+
+# misc
+.DS_Store
+npm-debug.log*
