@@ -19,7 +19,20 @@ main() {
   (cd app && npm ci --include=dev && npx prisma migrate deploy && npm run build)
 
   echo "==> worker: python deps (system-wide, no venv)"
-  python3 -m pip install -r worker/requirements.txt --break-system-packages --quiet
+  # A failure here must NOT abort the deploy — the web app (gavah) has to start
+  # regardless. Common cause: a Debian/apt-managed package (e.g. click) with no
+  # RECORD file that pip cannot upgrade; --ignore-installed sidesteps it by
+  # installing over the top instead of trying to uninstall it. The worker's
+  # heavy imports (faster-whisper, boto3) are lazy, so it starts and the site
+  # serves fine even if this is incomplete — these are only needed when a video
+  # is actually transcribed.
+  if ! python3 -m pip install -r worker/requirements.txt --break-system-packages --quiet 2>/tmp/gavah-pip.log; then
+    echo "    retrying with --ignore-installed (system-package conflict)…"
+    if ! python3 -m pip install -r worker/requirements.txt --break-system-packages --ignore-installed --quiet 2>>/tmp/gavah-pip.log; then
+      echo "    WARNING: worker deps incomplete (details in /tmp/gavah-pip.log)."
+      echo "    The web app still starts; transcription/clip render may be off until this is resolved."
+    fi
+  fi
 
   echo "==> pm2: start/restart gavah + gavah-worker"
   pm2 startOrRestart ecosystem.config.js --update-env
