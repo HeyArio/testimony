@@ -38,3 +38,17 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   They count toward the free cap like any other testimonial.
 - **Embed layouts are path segments** (`/w/[slug]` wall, `/w/[slug]/carousel`)
   rather than query params, so ISR caching keeps working per layout.
+- **pm2 runs from `ecosystem.config.js`** (`pm2 startOrRestart` in deploy.sh)
+  instead of two manual first-run commands — first start and every redeploy
+  are the same idempotent command. The ecosystem file parses `app/.env` and
+  injects it into the worker (which reads plain process env and would get
+  nothing under pm2); `GAVAH_DB` is derived from `DATABASE_URL`. The Next
+  app needs no injection — it loads `app/.env` itself.
+- **`scripts/setup-vps.sh` bootstraps a fresh Ubuntu VPS in one run:**
+  NodeSource Node 22, pm2 (+ systemd resurrection), nginx as an IP-only
+  catch-all `default_server` proxying :80 → :3000 (works before a domain
+  exists; when one arrives set `server_name` + certbot), ffmpeg +
+  fonts-vazirmatn, `app/.env` with a generated SESSION_SECRET, and a
+  `deploytest` wrapper in `/usr/local/bin` that runs `deploy.sh`. Idempotent;
+  never overwrites an existing `app/.env` or nginx config. nginx listens
+  IPv4-only so boxes with IPv6 disabled don't abort the bootstrap.

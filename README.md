@@ -29,11 +29,22 @@ GAVAH_DB=app/prisma/dev.db python3 worker/worker.py
 
 ## Production (VPS)
 
-```bash
-# first time
-pm2 start npm --name gavah --cwd app -- start
-pm2 start worker/worker.py --name gavah-worker --interpreter python3
+First time, on a fresh Ubuntu server (as root, no domain needed):
 
-# every deploy
-./deploy.sh
+```bash
+git clone https://github.com/HeyArio/testimony.git ~/testimony
+bash ~/testimony/scripts/setup-vps.sh
 ```
+
+That installs Node + pm2 + nginx + ffmpeg/fonts, creates `app/.env` with a
+generated `SESSION_SECRET` (fill in the `R2_*` values yourself), starts both
+pm2 processes (`gavah`, `gavah-worker`), and serves the app on
+`http://<server-ip>`. It also installs the one-word deploy command:
+
+```bash
+deploytest   # = ./deploy.sh: git pull → install → migrate → build → pm2 restart
+```
+
+When a domain arrives: point DNS at the server, set `server_name` in
+`/etc/nginx/sites-available/gavah`, run `certbot --nginx`, and change
+`APP_URL` in `app/.env` to the https URL.
