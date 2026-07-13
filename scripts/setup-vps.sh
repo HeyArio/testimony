@@ -45,8 +45,8 @@ if [ ! -d "$DIR/.git" ]; then
   git clone --branch "$BRANCH" "$REPO_URL" "$DIR"
 fi
 
-echo "==> data dir /var/lib/gavah (SQLite lives here)"
-mkdir -p /var/lib/gavah
+echo "==> data dir /var/lib/gavah (SQLite + local-mode media live here)"
+mkdir -p /var/lib/gavah/media
 
 echo "==> app/.env"
 if [ ! -f "$DIR/app/.env" ]; then
@@ -71,9 +71,18 @@ server {
     listen 80 default_server;
     server_name _;
 
-    # Videos upload straight to R2 via presigned URLs; only small payloads
-    # (forms, logos) pass through here.
-    client_max_body_size 25m;
+    # With R2 configured, videos upload straight to R2 via presigned URLs and
+    # only small payloads pass through here. Without R2 (local demo mode),
+    # uploads go to /api/upload/* — allow up to the app's 100MB video cap.
+    client_max_body_size 105m;
+
+    # Local-storage mode media (demo mode, no R2): serve straight from disk.
+    # Harmless when R2 is configured — these files just won't exist.
+    location /media/ {
+        alias /var/lib/gavah/media/;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
 
     location / {
         proxy_pass http://127.0.0.1:3000;

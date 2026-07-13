@@ -52,3 +52,23 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   `deploytest` wrapper in `/usr/local/bin` that runs `deploy.sh`. Idempotent;
   never overwrites an existing `app/.env` or nginx config. nginx listens
   IPv4-only so boxes with IPv6 disabled don't abort the bootstrap.
+- **Local-disk storage fallback when `R2_ACCOUNT_ID` is empty** ("demo mode").
+  presignPut() then mints an HMAC-signed relative PUT URL handled by
+  `/api/upload/[...key]`, files live under `/var/lib/gavah/media`
+  (`GAVAH_MEDIA_DIR`), and publicUrl() returns relative `/media/<key>` URLs
+  (served by an nginx alias in prod, with a Range-capable Next route as
+  fallback — relative so pages work on bare IP, tunnel, or future domain
+  alike). The worker mirrors the switch in fetch_media()/store_media().
+  CLAUDE.md's "video bytes never pass through Next" rule still holds whenever
+  R2 is configured — local mode exists so the product can run/demo on a bare
+  VPS with zero external services, at demo-scale traffic only.
+- **Demo content is seeded by `scripts/seed-demo.mjs`** — fictional café
+  (کافه گندم, slug `cafe-gandom`, plan pro so walls/clips are badge-free and
+  HD), invented Persian testimonials, login `demo@gavah.local`/`demo1234`.
+  `--videos <dir>` ingests mock phone videos: always normalized to H.264 MP4
+  via ffmpeg (phone HEVC won't play in browsers), stored like real uploads,
+  transcribe job queued so the worker produces transcript + thumb + clip.
+- **Live-recording demos go through a Cloudflare quick tunnel**
+  (`scripts/demo-tunnel.sh`): getUserMedia requires a secure origin, quick
+  tunnels give free https with no account; URL rotates per run, so this is a
+  demo tool, not a production plan.

@@ -34,6 +34,7 @@ MAX_ATTEMPTS = 3
 DB_PATH = os.environ.get("GAVAH_DB", "/var/lib/gavah/gavah.db")
 WHISPER_MODEL = os.environ.get("WHISPER_MODEL", "small")
 R2_BUCKET = os.environ.get("R2_BUCKET", "gavah")
+MEDIA_DIR = os.environ.get("GAVAH_MEDIA_DIR", "/var/lib/gavah/media")
 
 # Rendered clip geometry. Free plan gets 720x1280; pro gets full HD.
 CANVAS = {"free": (720, 1280), "pro": (1080, 1920)}
@@ -64,6 +65,28 @@ def s3():
         aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"],
         region_name="auto",
     )
+
+
+def storage_is_local() -> bool:
+    """Mirrors app/src/lib/r2.ts: empty R2_ACCOUNT_ID means media lives on
+    local disk under MEDIA_DIR (demo/dev mode, no R2 account needed)."""
+    return not os.environ.get("R2_ACCOUNT_ID")
+
+
+def fetch_media(key: str, dest_path: str):
+    if storage_is_local():
+        shutil.copyfile(os.path.join(MEDIA_DIR, key), dest_path)
+    else:
+        s3().download_file(R2_BUCKET, key, dest_path)
+
+
+def store_media(src_path: str, key: str, content_type: str):
+    if storage_is_local():
+        dest = os.path.join(MEDIA_DIR, key)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copyfile(src_path, dest)
+    else:
+        s3().upload_file(src_path, R2_BUCKET, key, ExtraArgs={"ContentType": content_type})
 
 
 def claim_job(conn: sqlite3.Connection):
@@ -139,7 +162,7 @@ def make_thumbnail(video_path: str, out_path: str):
 
 def handle_transcribe(conn: sqlite3.Connection, testimonial, tmp: str):
     video_path = os.path.join(tmp, "input" + os.path.splitext(testimonial["videoKey"])[1])
-    s3().download_file(R2_BUCKET, testimonial["videoKey"], video_path)
+    fetch_media(testimonial["videoKey"], video_path)
 
     segments, _info = get_model().transcribe(
         video_path, language="fa", word_timestamps=True, vad_filter=True
@@ -156,7 +179,7 @@ def handle_transcribe(conn: sqlite3.Connection, testimonial, tmp: str):
         thumb_path = os.path.join(tmp, "thumb.jpg")
         make_thumbnail(video_path, thumb_path)
         thumb_key = f"thumbs/{uuid.uuid4()}.jpg"
-        s3().upload_file(thumb_path, R2_BUCKET, thumb_key, ExtraArgs={"ContentType": "image/jpeg"})
+        store_media(thumb_path, thumb_key, "image/jpeg")
     except Exception:
         thumb_key = None  # thumbnail is nice-to-have; don't fail the job
 
@@ -248,7 +271,7 @@ def handle_render_clip(conn: sqlite3.Connection, testimonial, tmp: str):
     brand_color = testimonial["brandColor"] or "#B03A48"
 
     video_path = os.path.join(tmp, "input" + os.path.splitext(testimonial["videoKey"])[1])
-    s3().download_file(R2_BUCKET, testimonial["videoKey"], video_path)
+    fetch_media(testimonial["videoKey"], video_path)
 
     ass_path = os.path.join(tmp, "subs.ass")
     with open(ass_path, "w", encoding="utf-8") as f:
@@ -261,7 +284,7 @@ def handle_render_clip(conn: sqlite3.Connection, testimonial, tmp: str):
             # Logo lives in our own bucket; derive the key from the public URL.
             key = logo_url.split("/logos/")[-1]
             logo_path = os.path.join(tmp, "logo")
-            s3().download_file(R2_BUCKET, f"logos/{key}", logo_path)
+            fetch_media(f"logos/{key}", logo_path)
         except Exception:
             logo_path = None  # missing logo must not fail the render
 
@@ -297,7 +320,7 @@ def handle_render_clip(conn: sqlite3.Connection, testimonial, tmp: str):
     run(cmd)
 
     clip_key = f"clips/{uuid.uuid4()}.mp4"
-    s3().upload_file(out_path, R2_BUCKET, clip_key, ExtraArgs={"ContentType": "video/mp4"})
+    store_media(out_path, clip_key, "video/mp4")
     with conn:
         conn.execute("UPDATE Testimonial SET clipKey = ? WHERE id = ?", (clip_key, testimonial["id"]))
 
