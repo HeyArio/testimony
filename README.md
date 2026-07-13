@@ -80,3 +80,26 @@ bash scripts/demo-tunnel.sh   # prints a free https://….trycloudflare.com URL
 If transcribe jobs fail with `403 Forbidden`, Hugging Face is blocked from
 the server's region — set `HF_ENDPOINT="https://hf-mirror.com"` in
 `app/.env` and run `deploytest`.
+
+## Troubleshooting
+
+- **Browser shows the old site after a deploy** — hard refresh
+  (`Ctrl+Shift+R`); the tab cached the previous visit.
+- **JS/CSS fail with 400/404 and MIME type `text/html`** — port 80 is being
+  proxied to something that isn't the current app: usually a leftover process
+  still bound to the old port, or nginx pointing at the wrong port after the
+  app port changed. Reset cleanly:
+
+  ```bash
+  cd ~/testimony
+  git stash                     # park local edits (the port belongs in app/.env)
+  pm2 delete all                # clear stale/duplicate processes once
+  rm /etc/nginx/sites-available/gavah
+  bash scripts/setup-vps.sh     # rewrites nginx for the current PORT, redeploys
+  ```
+
+- **Changing the app port** — set `PORT="3001"` (or any port) in `app/.env`,
+  then refresh nginx as above. Never change the port in package.json or pm2:
+  `ecosystem.config.js` injects `PORT` from `app/.env` into `next start`, and
+  nginx + `scripts/demo-tunnel.sh` read the same value, so `app/.env` is the
+  single source of truth.

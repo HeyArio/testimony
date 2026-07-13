@@ -61,8 +61,18 @@ else
   echo "    exists, leaving it alone"
 fi
 
-echo "==> nginx: serve the app on port 80 (IP only, no domain yet)"
+# The app's listen port comes from PORT in app/.env (default 3000); nginx
+# must proxy to the same port.
+APP_PORT="$( (grep -oE '^PORT="?[0-9]+' "$DIR/app/.env" | grep -oE '[0-9]+') 2>/dev/null || true)"
+APP_PORT="${APP_PORT:-3000}"
+
+echo "==> nginx: serve the app on port 80 (IP only, no domain yet; app port $APP_PORT)"
 if [ ! -f /etc/nginx/sites-available/gavah ]; then
+  WROTE_NGINX=1
+else
+  WROTE_NGINX=0
+fi
+if [ "$WROTE_NGINX" = 1 ]; then
   cat > /etc/nginx/sites-available/gavah <<'NGINX'
 # Gavah — catch-all server so the bare IP works until there is a domain.
 # When a domain arrives: set server_name, then `certbot --nginx`.
@@ -95,6 +105,11 @@ server {
     }
 }
 NGINX
+  sed -i "s|127.0.0.1:3000|127.0.0.1:$APP_PORT|" /etc/nginx/sites-available/gavah
+fi
+if ! grep -q "127.0.0.1:$APP_PORT" /etc/nginx/sites-available/gavah; then
+  echo "    WARNING: existing nginx config does not proxy to port $APP_PORT."
+  echo "    Refresh it with:  rm /etc/nginx/sites-available/gavah && bash scripts/setup-vps.sh"
 fi
 ln -sf ../sites-available/gavah /etc/nginx/sites-enabled/gavah
 rm -f /etc/nginx/sites-enabled/default

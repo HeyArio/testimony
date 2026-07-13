@@ -72,3 +72,9 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   (`scripts/demo-tunnel.sh`): getUserMedia requires a secure origin, quick
   tunnels give free https with no account; URL rotates per run, so this is a
   demo tool, not a production plan.
+- **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
+  `next start` only honors PORT from process env, so ecosystem.config.js
+  injects it; setup-vps.sh writes the nginx proxy_pass from the same value
+  (and warns if an existing config disagrees), and demo-tunnel.sh reads it
+  too. Born of a real incident: the port was changed in one place, nginx kept
+  proxying :3000 to a stale process, and every asset 400'd as text/html.
