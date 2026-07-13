@@ -25,7 +25,8 @@ main() {
   pm2 startOrRestart ecosystem.config.js --update-env
   pm2 save
 
-  echo "==> done — app on 127.0.0.1:3000, nginx serves it on port 80"
+  port="$( (grep -oE '^PORT="?[0-9]+' app/.env | grep -oE '[0-9]+') 2>/dev/null || true)"
+  echo "==> done — app on 127.0.0.1:${port:-3000}, nginx serves it on port 80"
 }
 
 main "$@"

@@ -44,7 +44,9 @@ module.exports = {
       cwd: appDir,
       script: "npm",
       args: "start",
-      env: { NODE_ENV: "production" },
+      // `next start` reads its listen port from process env, not from .env
+      // files — so PORT must be injected here. nginx proxies to the same port.
+      env: { NODE_ENV: "production", ...(env.PORT ? { PORT: env.PORT } : {}) },
     },
     {
       name: "gavah-worker",

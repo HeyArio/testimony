@@ -18,6 +18,8 @@ if ! command -v cloudflared >/dev/null 2>&1; then
   rm -f /tmp/cloudflared.deb
 fi
 
-echo "==> opening tunnel to http://127.0.0.1:3000 (Ctrl-C to stop)"
+PORT="$( (grep -oE '^PORT="?[0-9]+' "$(dirname "$0")/../app/.env" | grep -oE '[0-9]+') 2>/dev/null || true)"
+PORT="${PORT:-3000}"
+echo "==> opening tunnel to http://127.0.0.1:$PORT (Ctrl-C to stop)"
 echo "    the https URL appears in the box below — open /r/<slug> on it to demo recording"
-exec cloudflared tunnel --url http://127.0.0.1:3000
+exec cloudflared tunnel --url "http://127.0.0.1:$PORT"
