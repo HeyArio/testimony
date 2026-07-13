@@ -171,7 +171,7 @@ export default function HomePage() {
                     <div className="text-[12.5px] text-[#C2A3A9]">{m.why.realRole}</div>
                   </div>
                   <span className="ms-auto flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white/15">
-                    <span className="ml-0.5 h-0 w-0 border-y-[6px] border-y-transparent border-r-[9px] border-r-white" />
+                    <span className="h-0 w-0 translate-x-[1px] border-y-[6px] border-y-transparent border-l-[9px] border-l-white" />
                   </span>
                 </div>
                 <p className="relative mb-2.5 mt-4 text-[15.5px] font-semibold leading-fa text-[#F7E9EB]">{m.why.realQuote}</p>
