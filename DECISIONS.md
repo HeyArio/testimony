@@ -130,6 +130,16 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   recording (getUserMedia) requires a secure origin — a free subdomain of
   an existing domain (e.g. gavah.nazarbanai.com) is the boring way to get
   one without buying anything. Bare-IP http access keeps working.
+- **`/demo/cafe` is a full fictional café website** (outside the marketing
+  route group — no Gavah chrome, slim honesty banner instead) that installs
+  the widget with the REAL two-line embed (`<script src="/embed.js">` +
+  `<div data-gavah-wall>`), so our own demo dogfoods the exact customer
+  integration path, full-page-load only (plain `<a>` links, no client nav —
+  embed.js mounts on load). The URL bar in the /demo browser frame links to
+  it. noindex; ISR 300s; graceful when the demo project is missing.
+- **Production gaps live in PRODUCTION.md** (tiered checklist: what blocks
+  the first real customer vs charging money vs deliberately-later), so the
+  demo can ship while the list survives.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

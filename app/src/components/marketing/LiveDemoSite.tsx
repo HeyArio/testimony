@@ -56,19 +56,23 @@ export function LiveDemoSite({ slug, brandColor }: { slug: string; brandColor: s
 
       {/* browser window */}
       <div className="overflow-hidden rounded-[18px] border border-hairline bg-card shadow-[0_24px_64px_rgba(58,32,40,.18)]">
-        {/* chrome bar */}
+        {/* chrome bar — the URL opens the full fake café site (real embed inside) */}
         <div className="flex items-center gap-3 border-b border-hairline bg-[#F3EBE7] px-4 py-2.5">
           <span className="flex gap-1.5">
             <span className="h-3 w-3 rounded-full bg-[#E0564F]/80" />
             <span className="h-3 w-3 rounded-full bg-[#E8B93E]/80" />
             <span className="h-3 w-3 rounded-full bg-[#57BB5C]/80" />
           </span>
-          <span
-            className="mx-auto w-full max-w-[300px] rounded-full bg-white px-4 py-1 text-center font-mono text-xs text-[#6B5A5E]"
+          <a
+            className="mx-auto w-full max-w-[300px] rounded-full bg-white px-4 py-1 text-center font-mono text-xs text-[#6B5A5E] transition-colors hover:text-primary-dark"
             dir="ltr"
+            href="/demo/cafe"
+            rel="noopener noreferrer"
+            target="_blank"
+            title={p.openSite}
           >
-            🔒 {c.url}
-          </span>
+            🔒 {c.url} ↗
+          </a>
           <span className="w-[52px]" />
         </div>
 
@@ -138,8 +142,18 @@ export function LiveDemoSite({ slug, brandColor }: { slug: string; brandColor: s
         </div>
       </div>
 
-      {/* invite to try the live loop */}
+      {/* invite to try the live loop + the full fake site */}
       <p className="mx-auto mt-5 max-w-2xl text-center text-[13.5px] leading-fa text-[#9B8288]">{p.tryNote}</p>
+      <p className="mt-2 text-center">
+        <a
+          className="text-[13.5px] font-bold text-primary-dark hover:text-ink"
+          href="/demo/cafe"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {p.openSite}
+        </a>
+      </p>
     </div>
   );
 }
