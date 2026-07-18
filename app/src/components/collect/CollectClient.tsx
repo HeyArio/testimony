@@ -91,11 +91,14 @@ function MetaFields({
       <div>
         <p className="label">{fa.collect.rating}</p>
         <input name="rating" type="hidden" value={rating || ""} />
-        <div className="flex gap-1" dir="ltr">
+        <div className="flex items-center gap-1" dir="ltr">
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               aria-label={faDigits(n)}
-              className={`text-2xl transition-colors ${n <= rating ? "text-accent" : "text-hairline"}`}
+              aria-pressed={n <= rating}
+              className={`p-0.5 text-3xl leading-none transition-colors ${
+                n <= rating ? "text-accent" : "text-ink/25 hover:text-accent/60"
+              }`}
               key={n}
               onClick={() => setRating(n)}
               type="button"
@@ -103,7 +106,13 @@ function MetaFields({
               ★
             </button>
           ))}
+          {rating > 0 && (
+            <span className="ms-2 text-sm font-bold text-ink/70">
+              {faDigits(rating)} / {faDigits(5)}
+            </span>
+          )}
         </div>
+        {rating === 0 && <p className="mt-1 text-xs text-ink/50">{fa.collect.ratingHint}</p>}
       </div>
       <label className="flex items-start gap-2 text-sm">
         <input className="mt-1" name="consent" required type="checkbox" />

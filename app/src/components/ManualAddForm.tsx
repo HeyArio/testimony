@@ -74,11 +74,14 @@ export function ManualAddForm({ projectId }: { projectId: string }) {
       </div>
       <div>
         <p className="label">{fa.collect.rating}</p>
-        <div className="flex gap-1" dir="ltr">
+        <div className="flex items-center gap-1" dir="ltr">
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               aria-label={faDigits(n)}
-              className={`text-2xl transition-colors ${n <= rating ? "text-accent" : "text-hairline"}`}
+              aria-pressed={n <= rating}
+              className={`p-0.5 text-3xl leading-none transition-colors ${
+                n <= rating ? "text-accent" : "text-ink/25 hover:text-accent/60"
+              }`}
               key={n}
               onClick={() => setRating(n)}
               type="button"
@@ -86,6 +89,11 @@ export function ManualAddForm({ projectId }: { projectId: string }) {
               ★
             </button>
           ))}
+          {rating > 0 && (
+            <span className="ms-2 text-sm font-bold text-ink/70">
+              {faDigits(rating)} / {faDigits(5)}
+            </span>
+          )}
         </div>
       </div>
       {error && <p className="text-sm font-bold text-primary">{error}</p>}
