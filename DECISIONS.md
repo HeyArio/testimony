@@ -110,17 +110,20 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   site can't break on a fresh install. The seed gives the café its own
   brand color (`#7A4E2D`) so the widget visibly wears a customer brand, not
   Gavah's; re-run `node scripts/seed-demo.mjs` after deploy to apply it.
-- **Demo TEXT testimonials are EPHEMERAL — never stored.** The API validates
-  and acks (`{published, ephemeral}`) without a DB write; the collect page
-  stashes the entry in sessionStorage and the demo walls render it back via
-  `DemoGuestCard`, which consumes the key on first read — so the visitor
-  sees their own card exactly once and a refresh clears it. No other
-  visitor ever sees it; the marketing wall cannot be polluted. (This
-  replaced a short-lived auto-approve + prune design.) Video on the demo
-  keeps the normal pending flow for live demonstrations; the seed purges
-  all visitor entries (public consent text) from the demo project on every
-  run — permanent demo videos belong in `seed --videos`. `deploy.sh` runs
-  the idempotent seed on every deploy so the live demo can't rot.
+- **Demo testimonials are EPHEMERAL, echoed only to their author.** Both
+  types answer `{published, ephemeral}`; the collect page writes the entry
+  to localStorage (origin-wide, 10-minute TTL) and `DemoGuestCard` renders
+  it on the demo walls AND inside the /demo widget iframe — live via the
+  "storage" event, so the /demo tab updates the moment the collect tab
+  submits. Text is never stored server-side at all. Video is stored as a
+  normal invisible pending row (worker can demo transcription; the owner
+  can approve keepers) and the response carries `videoUrl` for the
+  immediate echo. The seed purges non-approved visitor entries (public
+  consent text) on every run; approved keepers and seeded rows survive.
+  (This evolved from auto-approve+prune → strict consume-on-read
+  sessionStorage; the tab-scoped version confused even us, hence
+  localStorage + TTL.) `deploy.sh` runs the idempotent seed on every
+  deploy so the live demo can't rot.
 - **`scripts/setup-domain.sh <domain>` wires a (sub)domain + HTTPS in one
   run:** nginx server block (same shape as setup-vps.sh), `certbot --nginx`
   with auto-renewal, `APP_URL` rewrite, pm2 restart. Exists because video

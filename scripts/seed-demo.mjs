@@ -105,13 +105,14 @@ async function main() {
     create: { userId: user.id, name: "کافه گندم", slug: DEMO_SLUG, plan: "pro", brandColor: DEMO_BRAND_COLOR },
   });
 
-  // Demo submissions are ephemeral (never stored) — but purge any visitor
-  // entries that predate that rule, or that arrive via the video path and
-  // were left behind after a demonstration. Visitor entries carry the public
-  // consent text; seeded rows use CONSENT and are never touched.
+  // Demo submissions are ephemeral — text is never stored, and demo videos
+  // sit as invisible pending rows so the worker can process them. Purge
+  // those leftovers on every run. Visitor entries carry the public consent
+  // text; seeded rows use CONSENT and are never touched, and entries the
+  // owner explicitly APPROVED in the dashboard are keepers, also spared.
   const PUBLIC_CONSENT = "رضایت دارم این نظر به‌صورت عمومی نمایش داده شود."; // = fa.collect.consent
   const strays = await db.testimonial.findMany({
-    where: { projectId: project.id, consentText: PUBLIC_CONSENT },
+    where: { projectId: project.id, consentText: PUBLIC_CONSENT, NOT: { status: "approved" } },
   });
   if (strays.length > 0) {
     if (LOCAL_STORAGE) {

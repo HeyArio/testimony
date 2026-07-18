@@ -3,7 +3,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fa } from "@/i18n/fa";
 import { faDigits } from "@/lib/format";
-import { DEMO_GUEST_KEY } from "@/lib/demo";
+import { DEMO_GUEST_KEY, type DemoGuestEntry } from "@/lib/demo";
+
+/** Demo mode: hand the visitor's entry to the demo walls via localStorage —
+ * origin-wide, so the /demo tab's widget picks it up live. */
+function storeGuestEntry(entry: Omit<DemoGuestEntry, "at">) {
+  try {
+    localStorage.setItem(DEMO_GUEST_KEY, JSON.stringify({ ...entry, at: Date.now() }));
+  } catch {
+    // storage blocked — the thanks screen still works, just no echo
+  }
+}
 
 const MAX_SECONDS = 90;
 
@@ -137,16 +147,7 @@ function TextFlow({ slug, onDone }: { slug: string; onDone: (published: boolean)
     const data = await res.json().catch(() => ({}));
     if (res.ok) {
       if (data.ephemeral) {
-        // Demo mode: nothing was stored server-side — hand the entry to the
-        // wall via sessionStorage so this visitor (and only them) sees it.
-        try {
-          sessionStorage.setItem(
-            DEMO_GUEST_KEY,
-            JSON.stringify({ authorName: meta.authorName, authorRole: meta.authorRole, rating: meta.rating, text }),
-          );
-        } catch {
-          // storage blocked — the thanks screen still works, just no echo
-        }
+        storeGuestEntry({ authorName: meta.authorName, authorRole: meta.authorRole, rating: meta.rating, text });
       }
       onDone(!!data.published);
     } else {
@@ -284,14 +285,23 @@ function VideoFlow({ slug, onDone }: { slug: string; onDone: (published: boolean
         body: blob,
       });
       if (!put.ok) throw new Error("upload");
+      const meta = readMeta(form);
       const res = await fetch(`/api/public/${slug}/testimonials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "video", videoKey: key, ...readMeta(form) }),
+        body: JSON.stringify({ type: "video", videoKey: key, ...meta }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         throw new Error(data.error === "limit_reached" ? "full" : "submit");
+      }
+      if (data.ephemeral && data.videoUrl) {
+        storeGuestEntry({
+          authorName: meta.authorName,
+          authorRole: meta.authorRole,
+          rating: meta.rating,
+          videoUrl: String(data.videoUrl),
+        });
       }
       onDone(!!data.published);
     } catch (err) {

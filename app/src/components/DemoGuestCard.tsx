@@ -1,33 +1,59 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DEMO_GUEST_KEY, type DemoGuestEntry } from "@/lib/demo";
+import { DEMO_GUEST_KEY, DEMO_GUEST_TTL_MS, type DemoGuestEntry } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
 
-// Renders the visitor's own ephemeral demo entry on top of the demo wall.
-// The entry lives only in this tab's sessionStorage (written by the collect
-// page) and is removed on first read — so it survives exactly one viewing
-// and disappears on refresh. Other visitors never see it; nothing is stored
-// server-side. Mounted on the demo project's walls only.
+// Renders the visitor's own ephemeral demo entry (text or video) on top of
+// the demo walls — including inside the /demo widget iframe. The entry lives
+// in localStorage (origin-wide), so the demo tab picks it up via the
+// "storage" event the moment the collect tab writes it, with no reload.
+// Entries expire after DEMO_GUEST_TTL_MS and are deleted by whichever
+// reader sees them expired. Other visitors never see any of this; text
+// entries exist nowhere server-side.
+
+function readEntry(): DemoGuestEntry | null {
+  try {
+    const raw = localStorage.getItem(DEMO_GUEST_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as DemoGuestEntry;
+    if (!parsed || typeof parsed.authorName !== "string" || typeof parsed.at !== "number") return null;
+    if (typeof parsed.text !== "string" && typeof parsed.videoUrl !== "string") return null;
+    if (Date.now() - parsed.at > DEMO_GUEST_TTL_MS) {
+      localStorage.removeItem(DEMO_GUEST_KEY);
+      return null;
+    }
+    return parsed;
+  } catch {
+    return null; // blocked/corrupt storage — render nothing
+  }
+}
 
 export function DemoGuestCard({ brandColor }: { brandColor: string }) {
   const [entry, setEntry] = useState<DemoGuestEntry | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem(DEMO_GUEST_KEY);
-      if (!raw) return;
-      sessionStorage.removeItem(DEMO_GUEST_KEY); // consume: gone on refresh
-      const parsed = JSON.parse(raw) as DemoGuestEntry;
-      if (parsed && typeof parsed.text === "string" && typeof parsed.authorName === "string") {
-        setEntry(parsed);
-      }
-    } catch {
-      // blocked/corrupt storage — just render nothing
-    }
+    setEntry(readEntry());
+    // Live update: fires when another tab (the collect page) writes the key.
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === null || e.key === DEMO_GUEST_KEY) setEntry(readEntry());
+    };
+    window.addEventListener("storage", onStorage);
+    // Expire while mounted, too.
+    const timer = setInterval(() => setEntry(readEntry()), 30_000);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      clearInterval(timer);
+    };
   }, []);
 
   if (!entry) return null;
+
+  // Only trust same-origin relative /media URLs or plain https URLs.
+  const videoUrl =
+    entry.videoUrl && (entry.videoUrl.startsWith("/media/") || entry.videoUrl.startsWith("https://"))
+      ? entry.videoUrl
+      : null;
 
   return (
     <article className="card mb-4 border-2" style={{ borderColor: brandColor }}>
@@ -39,7 +65,10 @@ export function DemoGuestCard({ brandColor }: { brandColor: string }) {
           {fa.wall.guestTag}
         </span>
       </p>
-      <p className="whitespace-pre-wrap text-sm leading-fa">{entry.text}</p>
+      {videoUrl && (
+        <video className="mb-3 w-full rounded-card bg-ink" controls playsInline preload="metadata" src={videoUrl} />
+      )}
+      {entry.text && <p className="whitespace-pre-wrap text-sm leading-fa">{entry.text}</p>}
       <footer className="mt-3 flex items-center justify-between gap-2">
         <div>
           <p className="text-sm font-black">{entry.authorName}</p>

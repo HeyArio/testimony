@@ -3,18 +3,21 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { testimonialCapReached } from "@/lib/plan";
-import { headObject, MAX_VIDEO_BYTES } from "@/lib/r2";
+import { headObject, publicUrl, MAX_VIDEO_BYTES } from "@/lib/r2";
 import { DEMO_SLUG } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
 
 // Public endpoint: creates a pending testimonial after the (optional) video
 // was uploaded straight to R2. Never public until approved in the dashboard.
 //
-// Sole exception: TEXT entries on the seeded demo project are EPHEMERAL —
-// validated and acknowledged but never stored. The collect page keeps the
-// entry in sessionStorage and the demo wall renders it back to that visitor
-// only (gone on refresh), so trying the demo can never pollute the real
-// wall. Video on the demo keeps the normal pending flow.
+// Sole exception — the seeded demo project, so trying the demo closes the
+// loop without polluting the real wall. Both types answer `ephemeral: true`
+// and the visitor's own browser echoes the entry back (DemoGuestCard):
+//   text   -> never stored at all
+//   video  -> stored as a normal INVISIBLE pending row (the worker can
+//             demo transcription and the seed purge cleans it up on the
+//             next deploy), and the response carries the playback URL so
+//             the visitor sees their recording in the widget immediately.
 
 const KEY_RE = /^videos\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(webm|mp4)$/;
 
@@ -53,7 +56,8 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       return NextResponse.json({ error: "invalid_input" }, { status: 400 });
     }
   }
-  if (project.slug === DEMO_SLUG && d.type === "text") {
+  const isDemo = project.slug === DEMO_SLUG;
+  if (isDemo && d.type === "text") {
     // Ephemeral demo entry: validated, acknowledged, never stored.
     return NextResponse.json({ published: true, ephemeral: true });
   }
@@ -71,5 +75,13 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       ...(d.type === "video" ? { jobs: { create: { kind: "transcribe" } } } : {}),
     },
   });
+  if (isDemo && d.type === "video") {
+    return NextResponse.json({
+      id: testimonial.id,
+      published: true,
+      ephemeral: true,
+      videoUrl: publicUrl(d.videoKey),
+    });
+  }
   return NextResponse.json({ id: testimonial.id, published: false });
 }
