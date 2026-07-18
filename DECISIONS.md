@@ -110,15 +110,23 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   site can't break on a fresh install. The seed gives the café its own
   brand color (`#7A4E2D`) so the widget visibly wears a customer brand, not
   Gavah's; re-run `node scripts/seed-demo.mjs` after deploy to apply it.
-- **The demo project auto-publishes TEXT testimonials** (the one exception to
-  "never public until approved"): someone trying the live demo submits and
-  sees their words on the wall immediately — that's the demo's whole point.
-  Contained: demo slug only, text only (video keeps the normal flow), the
-  per-IP rate limit applies, and a prune keeps just the newest 12 visitor
-  entries (identified by the public consent text; seeded rows are never
-  pruned), deleting older ones plus their media. Real projects are
-  untouched. `deploy.sh` now runs the (idempotent) demo seed on every
-  deploy so the live demo can't rot.
+- **Demo TEXT testimonials are EPHEMERAL — never stored.** The API validates
+  and acks (`{published, ephemeral}`) without a DB write; the collect page
+  stashes the entry in sessionStorage and the demo walls render it back via
+  `DemoGuestCard`, which consumes the key on first read — so the visitor
+  sees their own card exactly once and a refresh clears it. No other
+  visitor ever sees it; the marketing wall cannot be polluted. (This
+  replaced a short-lived auto-approve + prune design.) Video on the demo
+  keeps the normal pending flow for live demonstrations; the seed purges
+  all visitor entries (public consent text) from the demo project on every
+  run — permanent demo videos belong in `seed --videos`. `deploy.sh` runs
+  the idempotent seed on every deploy so the live demo can't rot.
+- **`scripts/setup-domain.sh <domain>` wires a (sub)domain + HTTPS in one
+  run:** nginx server block (same shape as setup-vps.sh), `certbot --nginx`
+  with auto-renewal, `APP_URL` rewrite, pm2 restart. Exists because video
+  recording (getUserMedia) requires a secure origin — a free subdomain of
+  an existing domain (e.g. gavah.nazarbanai.com) is the boring way to get
+  one without buying anything. Bare-IP http access keeps working.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

@@ -105,6 +105,26 @@ async function main() {
     create: { userId: user.id, name: "کافه گندم", slug: DEMO_SLUG, plan: "pro", brandColor: DEMO_BRAND_COLOR },
   });
 
+  // Demo submissions are ephemeral (never stored) — but purge any visitor
+  // entries that predate that rule, or that arrive via the video path and
+  // were left behind after a demonstration. Visitor entries carry the public
+  // consent text; seeded rows use CONSENT and are never touched.
+  const PUBLIC_CONSENT = "رضایت دارم این نظر به‌صورت عمومی نمایش داده شود."; // = fa.collect.consent
+  const strays = await db.testimonial.findMany({
+    where: { projectId: project.id, consentText: PUBLIC_CONSENT },
+  });
+  if (strays.length > 0) {
+    if (LOCAL_STORAGE) {
+      for (const t of strays) {
+        for (const key of [t.videoKey, t.thumbKey, t.clipKey]) {
+          if (key) fs.rmSync(path.join(MEDIA_DIR, key), { force: true });
+        }
+      }
+    }
+    await db.testimonial.deleteMany({ where: { id: { in: strays.map((t) => t.id) } } });
+    console.log(`purged ${strays.length} visitor entr${strays.length === 1 ? "y" : "ies"} from the demo wall`);
+  }
+
   if (process.argv.includes("--reset")) {
     const old = await db.testimonial.findMany({ where: { projectId: project.id } });
     if (LOCAL_STORAGE) {

@@ -3,35 +3,18 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { testimonialCapReached } from "@/lib/plan";
-import { deleteObjects, headObject, MAX_VIDEO_BYTES } from "@/lib/r2";
-import { revalidateWalls } from "@/lib/walls";
+import { headObject, MAX_VIDEO_BYTES } from "@/lib/r2";
 import { DEMO_SLUG } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
 
 // Public endpoint: creates a pending testimonial after the (optional) video
 // was uploaded straight to R2. Never public until approved in the dashboard.
 //
-// Sole exception: TEXT entries on the seeded demo project publish instantly,
-// so someone trying the live demo sees their own words appear on the wall.
-// Contained by the per-IP rate limit plus a prune: only the newest
-// DEMO_KEEP visitor entries are kept, so junk can't pile up on the
-// marketing site. Real projects always require approval.
-
-const DEMO_KEEP = 12;
-
-async function pruneDemoVisitorEntries(projectId: string) {
-  // Visitor entries carry the public consent text; seeded ones don't.
-  const stale = await db.testimonial.findMany({
-    where: { projectId, consentText: fa.collect.consent },
-    orderBy: { createdAt: "desc" },
-    skip: DEMO_KEEP,
-  });
-  if (stale.length === 0) return;
-  await db.testimonial.deleteMany({ where: { id: { in: stale.map((t) => t.id) } } });
-  await deleteObjects(
-    stale.flatMap((t) => [t.videoKey, t.thumbKey, t.clipKey]).filter((k): k is string => !!k),
-  );
-}
+// Sole exception: TEXT entries on the seeded demo project are EPHEMERAL —
+// validated and acknowledged but never stored. The collect page keeps the
+// entry in sessionStorage and the demo wall renders it back to that visitor
+// only (gone on refresh), so trying the demo can never pollute the real
+// wall. Video on the demo keeps the normal pending flow.
 
 const KEY_RE = /^videos\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(webm|mp4)$/;
 
@@ -70,12 +53,14 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       return NextResponse.json({ error: "invalid_input" }, { status: 400 });
     }
   }
-  const autoPublish = project.slug === DEMO_SLUG && d.type === "text";
+  if (project.slug === DEMO_SLUG && d.type === "text") {
+    // Ephemeral demo entry: validated, acknowledged, never stored.
+    return NextResponse.json({ published: true, ephemeral: true });
+  }
   const testimonial = await db.testimonial.create({
     data: {
       projectId: project.id,
       type: d.type,
-      status: autoPublish ? "approved" : "pending",
       authorName: d.authorName,
       authorRole: d.authorRole || null,
       rating: d.rating ?? null,
@@ -86,9 +71,5 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       ...(d.type === "video" ? { jobs: { create: { kind: "transcribe" } } } : {}),
     },
   });
-  if (autoPublish) {
-    await pruneDemoVisitorEntries(project.id);
-    revalidateWalls(project.slug);
-  }
-  return NextResponse.json({ id: testimonial.id, published: autoPublish });
+  return NextResponse.json({ id: testimonial.id, published: false });
 }

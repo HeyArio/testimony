@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { showBadge, testimonialCapReached } from "@/lib/plan";
+import { DEMO_SLUG } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
+import { DemoGuestCard } from "@/components/DemoGuestCard";
 import { WallGrid } from "@/components/WallGrid";
 
 // Hosted Wall of Love. Approved testimonials only; cached 5 minutes.
@@ -26,6 +28,7 @@ export default async function WallPage({ params }: { params: { slug: string } })
         )}
         <h1 className="text-2xl font-black">{fa.wall.title(project.name)}</h1>
       </header>
+      {project.slug === DEMO_SLUG && <DemoGuestCard brandColor={project.brandColor} />}
       <WallGrid
         brandColor={project.brandColor}
         collectUrl={collectUrl}

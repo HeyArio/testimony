@@ -3,6 +3,8 @@ import Script from "next/script";
 import { db } from "@/lib/db";
 import { showBadge, testimonialCapReached } from "@/lib/plan";
 import { appUrl } from "@/config/brand";
+import { DEMO_SLUG } from "@/lib/demo";
+import { DemoGuestCard } from "@/components/DemoGuestCard";
 import { WallCarousel, WallGrid } from "@/components/WallGrid";
 
 // Shared body of the /w/[slug] embed routes (one per layout). Framing is
@@ -25,6 +27,8 @@ export async function EmbedWall({ slug, layout }: { slug: string; layout: "wall"
   const Wall = layout === "carousel" ? WallCarousel : WallGrid;
   return (
     <main className="p-2" id="gavah-root">
+      {/* The visitor's own ephemeral entry (demo project only, session-scoped). */}
+      {project.slug === DEMO_SLUG && <DemoGuestCard brandColor={project.brandColor} />}
       <Wall
         brandColor={project.brandColor}
         collectUrl={collectUrl}
