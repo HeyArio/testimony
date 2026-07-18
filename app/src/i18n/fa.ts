@@ -260,6 +260,16 @@ export const fa = {
       addressTitle: "نشانی",
       address: "تهران، خیابان انقلاب، کوچه‌ی گندم، پلاک ۱۲",
       widgetNote: "بخش زیر، ویجت واقعی گواه است که با دو خط کد در این صفحه نصب شده — دکمه‌ی «ثبت تجربه» را بزن تا چرخه‌ی کامل را ببینی.",
+      storiesKicker: "بعد از تأیید، جادو شروع می‌شود",
+      storiesTitle: "همین نظرها، آماده‌ی استوری اینستاگرام",
+      storiesSub:
+        "گواه از هر ویدیوی مشتری یک کلیپ عمودی ۹:۱۶ می‌سازد — زیرنویس کلمه‌به‌کلمه‌ی فارسی، با رنگ و لوگوی کافه.",
+      storiesNote: "پیش‌نمایش گرافیکی — کلیپ واقعی از ویدیوی خود مشتری ساخته می‌شود.",
+      stories: [
+        { words: ["بهترین", "قهوه‌ای", "که", "تا", "حالا", "خوردم"], name: "نرگس موسوی", role: "مشتری", time: "۰:۱۸" },
+        { words: ["صبح‌هام", "با", "قهوه‌ی", "گندم", "شروع", "می‌شه"], name: "مریم احدی", role: "نویسنده", time: "۰:۳۲" },
+        { words: ["جلسه‌هامون", "رو", "همیشه", "اینجا", "برگزاریم"], name: "حمید توکلی", role: "مدیر استارتاپ", time: "۰:۴۵" },
+      ],
     },
     // The fictional customer site shown inside the /demo browser frame. The
     // widget content is *her students* praising the studio — a real wall shows
@@ -412,7 +422,9 @@ export const fa = {
       "به چه کسی پیشنهادش می‌دهی؟",
     ],
     recordVideo: "ضبط ویدیو",
+    recordVideoHint: "با دوربین گوشی، حداکثر ۹۰ ثانیه",
     writeText: "نوشتن متن",
+    writeTextHint: "چند خط کافی است",
     startRecording: "شروع ضبط",
     stopRecording: "پایان ضبط",
     retake: "دوباره",

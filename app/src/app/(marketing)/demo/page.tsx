@@ -51,7 +51,7 @@ export default async function DemoPage() {
 
       {/* how it got there: two lines of code */}
       <section className="px-5 pb-16 sm:pb-24">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl text-center" data-reveal>
           <h2 className="mb-7 text-2xl font-extrabold leading-fa sm:text-3xl">{m.demoPage.embedTitle}</h2>
           <EmbedCodeCard />
           <p className="mx-auto mt-4 max-w-md text-[13.5px] leading-fa text-[#9B8288]">{m.demoPage.embedNote}</p>
@@ -61,13 +61,18 @@ export default async function DemoPage() {
       {/* the other half of the loop: how testimonials get collected */}
       <section className="px-5 pb-16 sm:pb-24">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-10 text-center">
+          <div className="mb-10 text-center" data-reveal>
             <div className="mb-2.5 text-sm font-bold text-primary-dark">{m.demoPage.flowKicker}</div>
             <h2 className="text-2xl font-extrabold leading-fa sm:text-3xl">{m.demoPage.flowTitle}</h2>
           </div>
           <div className="grid gap-5 sm:grid-cols-3">
             {m.demoPage.flowSteps.map((step, i) => (
-              <div className="flex flex-col gap-3.5 rounded-[18px] border border-hairline bg-card p-6" key={step.title}>
+              <div
+                className="card-lift flex flex-col gap-3.5 rounded-[18px] border border-hairline bg-card p-6"
+                data-reveal
+                key={step.title}
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-extrabold text-white">
                   {["۱", "۲", "۳"][i]}
                 </span>

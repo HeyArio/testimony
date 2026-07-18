@@ -33,7 +33,25 @@ export function CollectClient({ slug }: { slug: string }) {
 
   if (mode === "done") {
     return (
-      <div className="card text-center">
+      <div className="card relative text-center">
+        {/* one short celebratory star burst */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-0">
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <span
+              className="absolute text-accent"
+              key={i}
+              style={{
+                insetInlineStart: `${10 + i * 15}%`,
+                top: -6,
+                fontSize: 13 + ((i * 7) % 11),
+                animation: `gvFloat 1.9s ease-out ${i * 0.2}s 3`,
+                opacity: 0,
+              }}
+            >
+              ★
+            </span>
+          ))}
+        </div>
         <p className="text-2xl font-black">{fa.collect.thanksTitle}</p>
         <p className="mt-2 text-ink/80">{published ? fa.collect.thanksLiveBody : fa.collect.thanksBody}</p>
         {published && (
@@ -49,11 +67,27 @@ export function CollectClient({ slug }: { slug: string }) {
     <div className="flex flex-col gap-4">
       {mode === "choose" && (
         <div className="grid grid-cols-2 gap-3">
-          <button className="btn-primary" onClick={() => setMode("video")} type="button">
-            🎥 {fa.collect.recordVideo}
+          <button
+            className="card card-lift flex flex-col items-center gap-1.5 !border-2 !border-primary !p-5 text-center"
+            onClick={() => setMode("video")}
+            type="button"
+          >
+            <span aria-hidden className="text-3xl">
+              🎥
+            </span>
+            <span className="font-black">{fa.collect.recordVideo}</span>
+            <span className="text-xs text-ink/55">{fa.collect.recordVideoHint}</span>
           </button>
-          <button className="btn-ghost" onClick={() => setMode("text")} type="button">
-            ✍️ {fa.collect.writeText}
+          <button
+            className="card card-lift flex flex-col items-center gap-1.5 !p-5 text-center"
+            onClick={() => setMode("text")}
+            type="button"
+          >
+            <span aria-hidden className="text-3xl">
+              ✍️
+            </span>
+            <span className="font-black">{fa.collect.writeText}</span>
+            <span className="text-xs text-ink/55">{fa.collect.writeTextHint}</span>
           </button>
         </div>
       )}
@@ -322,12 +356,25 @@ function VideoFlow({ slug, onDone }: { slug: string; onDone: (published: boolean
 
   return (
     <form className="card flex flex-col gap-4" onSubmit={onSubmit}>
-      <video
-        className="aspect-[3/4] w-full rounded-card bg-ink object-cover"
-        controls={rec === "preview"}
-        playsInline
-        ref={videoRef}
-      />
+      <div className="relative">
+        <video
+          className={`aspect-[3/4] w-full rounded-card bg-ink object-cover transition-shadow ${
+            rec === "recording" ? "shadow-[0_0_0_3px_rgba(176,58,72,.55)]" : ""
+          }`}
+          controls={rec === "preview"}
+          playsInline
+          ref={videoRef}
+        />
+        {rec === "recording" && (
+          <span className="absolute start-3 top-3 flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-[2px]">
+            <span
+              className="h-2 w-2 rounded-full bg-[#e5484d]"
+              style={{ animation: "gvBlink 1.4s ease-in-out infinite" }}
+            />
+            <span className="font-mono text-[11px] tracking-wider text-white">REC</span>
+          </span>
+        )}
+      </div>
       <div className="flex items-center justify-between gap-3">
         {rec === "idle" && (
           <button className="btn-primary flex-1" onClick={start} type="button">

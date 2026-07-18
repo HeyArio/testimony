@@ -140,6 +140,17 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
 - **Production gaps live in PRODUCTION.md** (tiered checklist: what blocks
   the first real customer vs charging money vs deliberately-later), so the
   demo can ship while the list survives.
+- **One site-wide motion system, CSS + one vanilla driver.** `[data-reveal]`
+  elements fade/slide in on scroll via a ~20-line IntersectionObserver
+  script in the root layout (MutationObserver keeps it alive across client
+  navs). The hidden state only exists under `html.gv-motion` — set by JS
+  when `prefers-reduced-motion` allows — so bots/no-JS/reduced-motion always
+  see full content. `.card-lift` and upgraded `.btn-*` give hover
+  micro-motion everywhere; both are transform-only, so using them inside
+  the embed never changes the iframe's reported height. Signature moments:
+  café hero steam cup + an "Instagram stories" karaoke strip on /demo/cafe
+  (stylized preview of M3 clip output, labeled as such), REC badge +
+  star-burst thanks on the collect page, brand-tinted wall header.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

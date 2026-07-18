@@ -19,7 +19,7 @@ const darkTexture = {
 export default function PricingPage() {
   return (
     <main>
-      <section className="px-5 pt-14 text-center sm:pt-22">
+      <section className="px-5 pt-14 text-center sm:pt-22" data-reveal>
         <h1 className="text-3xl font-black leading-fa sm:text-[44px]" style={{ textWrap: "balance" }}>
           {m.pricingPage.title}
         </h1>
@@ -34,7 +34,7 @@ export default function PricingPage() {
 
       {/* comparison table */}
       <section className="px-5 pt-12 sm:pt-20">
-        <div className="mx-auto max-w-2xl overflow-hidden rounded-[18px] border border-hairline bg-card">
+        <div className="mx-auto max-w-2xl overflow-hidden rounded-[18px] border border-hairline bg-card" data-reveal>
           <div className="grid grid-cols-[1.4fr_1fr_1fr] border-b border-hairline bg-porcelain px-5 py-4">
             <span />
             <span className="text-center text-sm font-extrabold">{m.pricingPage.compareFree}</span>
@@ -54,14 +54,14 @@ export default function PricingPage() {
       </section>
 
       <section className="px-5 py-12 sm:py-20">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-2xl" data-reveal>
           <h2 className="mb-7 text-center text-2xl font-extrabold leading-fa sm:text-3xl">{m.faqTitle}</h2>
           <FaqAccordion faqs={m.pricingPage.faqs} />
         </div>
       </section>
 
       <section className="px-5 pb-16 sm:pb-24">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-ink px-7 py-11 text-center sm:py-16" style={darkTexture}>
+        <div className="mx-auto max-w-4xl rounded-3xl bg-ink px-7 py-11 text-center sm:py-16" data-reveal style={darkTexture}>
           <h2 className="text-2xl font-extrabold leading-fa text-white sm:text-4xl">{m.finalCta.title}</h2>
           <div className="mt-7 flex flex-col items-center gap-3">
             <Link

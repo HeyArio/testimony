@@ -109,7 +109,7 @@ function HeroPhones() {
 
 function SectionHeading({ kicker, title, sub }: { kicker?: string; title: string; sub?: string }) {
   return (
-    <div className="mb-11 text-center">
+    <div className="mb-11 text-center" data-reveal>
       {kicker && <div className="mb-2.5 text-sm font-bold text-primary-dark">{kicker}</div>}
       <h2 className="text-2xl font-extrabold leading-fa sm:text-4xl">{title}</h2>
       {sub && <p className="mx-auto mt-3.5 max-w-lg text-[15.5px] leading-fa text-[#5D4A51]">{sub}</p>}
@@ -146,7 +146,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-3xl">
           <SectionHeading kicker={m.why.kicker} title={m.why.title} />
           <div className="grid items-start gap-7 sm:grid-cols-2">
-            <div>
+            <div data-reveal>
               <div className="rounded-card border border-hairline bg-[#fafbfb] p-5 opacity-85 grayscale">
                 <div className="flex items-center gap-2.5 border-b border-hairline pb-3.5">
                   <span className="h-[34px] w-[34px] rounded-full bg-[#c8cfd6]" />
@@ -166,7 +166,7 @@ export default async function HomePage() {
               </div>
               <p className="mt-3.5 text-center text-[14.5px] leading-fa text-[#9B8288]">{m.why.fakeCaption}</p>
             </div>
-            <div>
+            <div data-reveal style={{ transitionDelay: "120ms" }}>
               <div className="relative overflow-hidden rounded-card bg-ink p-5 shadow-[0_14px_36px_rgba(58,32,40,.22)]">
                 <div className="absolute inset-0" style={darkTexture} />
                 <div className="relative flex items-center gap-3">
@@ -196,7 +196,12 @@ export default async function HomePage() {
           <SectionHeading kicker={m.how.kicker} title={m.how.title} />
           <div className="grid gap-5 sm:grid-cols-3">
             {m.how.steps.map((step, i) => (
-              <div className="flex flex-col gap-3.5 rounded-[18px] border border-hairline bg-card p-6" key={step.title}>
+              <div
+                className="card-lift flex flex-col gap-3.5 rounded-[18px] border border-hairline bg-card p-6"
+                data-reveal
+                key={step.title}
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary font-extrabold text-white">
                   {["۱", "۲", "۳"][i]}
                 </span>
@@ -236,7 +241,7 @@ export default async function HomePage() {
       {/* the magic (dark) */}
       <section className="bg-ink px-5 py-16 sm:py-28" style={darkTexture}>
         <div className="mx-auto grid max-w-4xl items-center gap-8 sm:grid-cols-2 sm:gap-16">
-          <div>
+          <div data-reveal>
             <div className="mb-3 text-sm font-bold text-primary">{m.magic.kicker}</div>
             <h2 className="text-2xl font-extrabold leading-fa text-white sm:text-[38px] sm:leading-[1.65]">{m.magic.title}</h2>
             <p className="mb-6 mt-4 leading-fa text-[#DCC3C8]">{m.magic.body}</p>
@@ -249,7 +254,7 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center" data-reveal style={{ transitionDelay: "140ms" }}>
             <div
               className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#2A161C] shadow-[0_24px_60px_rgba(0,0,0,.4)]"
               style={{ width: "min(280px, 80vw)", aspectRatio: "9/16" }}
@@ -300,7 +305,7 @@ export default async function HomePage() {
 
       {/* publish anywhere */}
       <section className="px-5 pb-16 sm:pb-28">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl text-center" data-reveal>
           <h2 className="mb-7 text-2xl font-extrabold leading-fa sm:text-3xl">{m.publish.title}</h2>
           <div className="mb-7 flex flex-wrap justify-center gap-2.5">
             {m.publish.platforms.map((p) => (
@@ -337,7 +342,7 @@ export default async function HomePage() {
 
       {/* final CTA */}
       <section className="px-5 pb-16 sm:pb-24">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-ink px-7 py-11 text-center sm:py-16" style={darkTexture}>
+        <div className="mx-auto max-w-4xl rounded-3xl bg-ink px-7 py-11 text-center sm:py-16" data-reveal style={darkTexture}>
           <h2 className="text-2xl font-extrabold leading-fa text-white sm:text-4xl">{m.finalCta.title}</h2>
           <div className="mt-7 flex flex-col items-center gap-3">
             <Link

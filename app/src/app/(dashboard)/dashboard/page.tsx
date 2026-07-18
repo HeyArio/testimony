@@ -23,7 +23,7 @@ export default async function DashboardPage() {
       {projects.length === 0 && <p className="text-ink/70">{fa.projects.empty}</p>}
       <div className="grid gap-4 sm:grid-cols-2">
         {projects.map((p) => (
-          <Link className="card block transition-colors hover:border-primary" href={`/dashboard/${p.id}`} key={p.id}>
+          <Link className="card card-lift block hover:border-primary" href={`/dashboard/${p.id}`} key={p.id}>
             <div className="flex items-center justify-between gap-3">
               <span className="flex items-center gap-3">
                 <span className="inline-block h-5 w-5 rounded-full border border-hairline" style={{ background: p.brandColor }} />

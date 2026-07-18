@@ -6,7 +6,7 @@ const t = fa.marketing.plans;
 export function PlanCards() {
   return (
     <div className="grid items-stretch gap-5 sm:grid-cols-2">
-      <div className="flex flex-col rounded-[20px] border border-hairline bg-card p-8">
+      <div className="card-lift flex flex-col rounded-[20px] border border-hairline bg-card p-8" data-reveal>
         <h3 className="text-xl font-extrabold">{t.free.name}</h3>
         <div className="mb-1 mt-3.5 text-4xl font-black">{t.free.price}</div>
         <div className="mb-6 text-[13.5px] text-[#9B8288]">{t.free.period}</div>
@@ -30,7 +30,11 @@ export function PlanCards() {
         </Link>
       </div>
 
-      <div className="relative flex flex-col rounded-[20px] bg-ink p-8 shadow-[0_18px_44px_rgba(58,32,40,.28)]">
+      <div
+        className="card-lift relative flex flex-col rounded-[20px] bg-ink p-8 shadow-[0_18px_44px_rgba(58,32,40,.28)]"
+        data-reveal
+        style={{ transitionDelay: "120ms" }}
+      >
         <span className="absolute -top-3 start-7 rounded-full bg-accent px-3.5 py-1 text-[12.5px] font-extrabold text-ink">
           {t.pro.popular}
         </span>

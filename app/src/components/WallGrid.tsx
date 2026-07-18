@@ -17,7 +17,7 @@ type WallProps = {
 
 function WallCard({ testimonial: t, brandColor }: { testimonial: Testimonial; brandColor: string }) {
   return (
-    <article className="card break-inside-avoid">
+    <article className="card card-lift break-inside-avoid" data-reveal>
       {t.type === "video" && t.videoKey && (
         <video
           className="mb-3 w-full rounded-card bg-ink"
