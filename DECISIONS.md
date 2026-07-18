@@ -151,6 +151,27 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   café hero steam cup + an "Instagram stories" karaoke strip on /demo/cafe
   (stylized preview of M3 clip output, labeled as such), REC badge +
   star-burst thanks on the collect page, brand-tinted wall header.
+- **آوازه — the proof-weighted trust score.** Name lives ONLY in
+  `brand.scoreNameFa` (renaming = one line; candidates considered: مهر
+  گواه، زبانزد). Formula in `lib/avazeh.ts`: weighted rating mean where
+  video counts 2×, weights decay with a 180-day half-life, owner-added
+  manual entries count 0.6×; shown as score/10 with ≥3 rated approved
+  testimonials, else a "not enough" state. Computed on read (no schema
+  change), cached with the walls. Embeddable seal: `data-gavah-seal` divs
+  mount a fixed-size iframe to `/w/[slug]/seal`; the seal links to the
+  hosted wall and always carries the گواه wordmark (it doubles as
+  distribution). Placed on the hosted wall header, dashboard (with its own
+  snippet), and the café demo.
+- **Telegram bot: notifications + in-chat moderation.** `lib/telegram.ts`
+  (no-ops until `TELEGRAM_BOT_TOKEN` set), webhook at
+  `/api/telegram/webhook` guarded by Telegram's `secret_token` header;
+  linking via single-use `/start <uuid>` deep links minted per project
+  (`telegramLinkToken`/`telegramChatId` columns); approve/reject inline
+  buttons authorize by matching the chat to the project's linked chat.
+  Notifications are fire-and-forget — Telegram being down can never break
+  a submit. `scripts/setup-telegram.sh` validates the token, writes env,
+  and registers the webhook (requires https APP_URL). This closes the
+  Tier-1 "notifications" gap in PRODUCTION.md.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

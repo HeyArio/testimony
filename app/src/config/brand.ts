@@ -6,6 +6,8 @@ export const brand = {
   nameEn: "Gavah",
   taglineFa: "گواهی مشتری‌های راضی‌ات را جمع کن",
   badgeTextFa: "ساخته‌شده با گواه",
+  // The proof-weighted trust score ("Avazeh" = renown). Rename here only.
+  scoreNameFa: "آوازه",
   colors: {
     ink: "#3A2028",
     primary: "#B03A48",

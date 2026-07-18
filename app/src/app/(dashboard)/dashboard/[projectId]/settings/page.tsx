@@ -3,7 +3,9 @@ import { db } from "@/lib/db";
 import { requireUser } from "@/lib/auth";
 import { fa } from "@/i18n/fa";
 import { customQuestions } from "@/lib/questions";
+import { telegramBotUsername, telegramEnabled } from "@/lib/telegram";
 import { BrandSettingsForm } from "@/components/BrandSettingsForm";
+import { TelegramConnect } from "@/components/TelegramConnect";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +25,11 @@ export default async function SettingsPage({ params }: { params: { projectId: st
           logoUrl: project.logoUrl,
           questions: customQuestions(project.questionsJson),
         }}
+      />
+      <TelegramConnect
+        available={telegramEnabled() && !!telegramBotUsername()}
+        connected={!!project.telegramChatId}
+        projectId={project.id}
       />
     </div>
   );

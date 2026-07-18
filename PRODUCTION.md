@@ -23,12 +23,11 @@ DECISIONS.md as usual.
   `scripts/seed-demo.mjs` already does, replace `videoKey`, delete the
   original). Keep webm accepted at upload; fix on the server.
 
-- [ ] **New-testimonial notifications.** Businesses get no signal when a
-  testimonial arrives; pending entries rot and the collect→approve→display
-  loop dies. Even one channel is transformative: email (Resend/SMTP), or —
-  more realistic for the market — SMS or a Telegram bot message
-  («یک گواهی جدید دارید»). Fire on create in
-  `app/src/app/api/public/[slug]/testimonials/route.ts`.
+- [x] **New-testimonial notifications.** Done via the Telegram bot:
+  instant message with approve/reject buttons in chat. Activate on the
+  VPS with `bash scripts/setup-telegram.sh` (needs a @BotFather token and
+  https APP_URL), then connect each project from its settings page.
+  Email/SMS remain optional future channels.
 
 - [ ] **Validate the magic on real footage.** Run ~10 real, noisy,
   colloquial phone-recorded Persian videos through transcribe → clip on the

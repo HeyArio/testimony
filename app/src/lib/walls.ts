@@ -5,4 +5,5 @@ export function revalidateWalls(slug: string) {
   revalidatePath(`/wall/${slug}`);
   revalidatePath(`/w/${slug}`);
   revalidatePath(`/w/${slug}/carousel`);
+  revalidatePath(`/w/${slug}/seal`);
 }

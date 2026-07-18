@@ -5,6 +5,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { testimonialCapReached } from "@/lib/plan";
 import { headObject, publicUrl, MAX_VIDEO_BYTES } from "@/lib/r2";
 import { DEMO_SLUG } from "@/lib/demo";
+import { notifyNewTestimonial } from "@/lib/telegram";
 import { fa } from "@/i18n/fa";
 
 // Public endpoint: creates a pending testimonial after the (optional) video
@@ -75,6 +76,8 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
       ...(d.type === "video" ? { jobs: { create: { kind: "transcribe" } } } : {}),
     },
   });
+  // Telegram ping (fire-and-forget — must never delay or fail the submit).
+  void notifyNewTestimonial(project, testimonial).catch(() => {});
   if (isDemo && d.type === "video") {
     return NextResponse.json({
       id: testimonial.id,

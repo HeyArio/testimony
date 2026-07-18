@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { db } from "@/lib/db";
 import { DEMO_SLUG } from "@/lib/demo";
+import { computeAvazeh } from "@/lib/avazeh";
+import { AvazehSeal } from "@/components/AvazehSeal";
 import { fa } from "@/i18n/fa";
 
 // The "inception" demo: a full fictional café website that installs the
@@ -21,8 +23,12 @@ export const metadata: Metadata = {
 };
 
 export default async function CafeDemoPage() {
-  const project = await db.project.findUnique({ where: { slug: DEMO_SLUG } });
+  const project = await db.project.findUnique({
+    where: { slug: DEMO_SLUG },
+    include: { testimonials: { where: { status: "approved" } } },
+  });
   const color = project?.brandColor ?? "#7A4E2D";
+  const avazeh = project ? computeAvazeh(project.testimonials) : null;
 
   return (
     <div className="bg-white text-ink">
@@ -260,6 +266,11 @@ export default async function CafeDemoPage() {
               {c.sectionKicker}
             </div>
             <h2 className="mb-3 text-center text-2xl font-extrabold leading-fa sm:text-3xl">{c.sectionTitle}</h2>
+            {avazeh && (
+              <div className="mb-4 text-center">
+                <AvazehSeal avazeh={avazeh} brandColor={color} compact />
+              </div>
+            )}
             <p className="mx-auto mb-8 max-w-2xl text-center text-[13px] leading-fa text-ink/45">{c.widgetNote}</p>
           </div>
           {project ? (

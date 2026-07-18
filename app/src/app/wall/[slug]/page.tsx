@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { showBadge, testimonialCapReached } from "@/lib/plan";
 import { DEMO_SLUG } from "@/lib/demo";
+import { computeAvazeh } from "@/lib/avazeh";
 import { fa } from "@/i18n/fa";
+import { AvazehSeal } from "@/components/AvazehSeal";
 import { DemoGuestCard } from "@/components/DemoGuestCard";
 import { WallGrid } from "@/components/WallGrid";
 
@@ -33,6 +35,14 @@ export default async function WallPage({ params }: { params: { slug: string } })
         )}
         <h1 className="text-2xl font-black leading-fa sm:text-3xl">{fa.wall.title(project.name)}</h1>
         <span className="h-1 w-14 rounded-full" style={{ background: project.brandColor }} />
+        {(() => {
+          const avazeh = computeAvazeh(project.testimonials);
+          return avazeh ? (
+            <div className="mt-2">
+              <AvazehSeal avazeh={avazeh} brandColor={project.brandColor} compact />
+            </div>
+          ) : null;
+        })()}
       </header>
       {project.slug === DEMO_SLUG && <DemoGuestCard brandColor={project.brandColor} />}
       <WallGrid

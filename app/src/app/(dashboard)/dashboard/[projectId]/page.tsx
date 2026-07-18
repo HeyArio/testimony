@@ -7,6 +7,8 @@ import { publicUrl } from "@/lib/r2";
 import { appUrl } from "@/config/brand";
 import { fa } from "@/i18n/fa";
 import { faDigits } from "@/lib/format";
+import { computeAvazeh, AVAZEH_MIN_RATED } from "@/lib/avazeh";
+import { AvazehSeal } from "@/components/AvazehSeal";
 import { CopySnippet } from "@/components/CopySnippet";
 import { ManualAddForm } from "@/components/ManualAddForm";
 import { TestimonialCard } from "@/components/TestimonialCard";
@@ -42,6 +44,8 @@ export default async function ProjectPage({ params }: { params: { projectId: str
   const embedCarouselCode = `<script src="${base}/embed.js" async></script>\n<div data-gavah-wall="${project.slug}" data-gavah-layout="carousel"></div>`;
   const count = project.testimonials.length;
   const isFree = project.plan !== "pro";
+  const avazeh = computeAvazeh(project.testimonials.filter((t) => t.status === "approved"));
+  const sealEmbedCode = `<script src="${base}/embed.js" async></script>\n<div data-gavah-seal="${project.slug}"></div>`;
 
   return (
     <div className="flex flex-col gap-6">
@@ -70,6 +74,27 @@ export default async function ProjectPage({ params }: { params: { projectId: str
           <CopySnippet multiline text={embedCarouselCode} />
         </div>
         <p className="text-xs leading-fa text-ink/60">{fa.inbox.embedCtaNote}</p>
+      </div>
+
+      {/* آوازه — the proof-weighted trust score + its embeddable seal */}
+      <div className="card flex flex-col gap-3">
+        <div>
+          <p className="font-black">{fa.avazeh.dashTitle}</p>
+          <p className="mt-1 text-xs leading-fa text-ink/60">{fa.avazeh.dashHint}</p>
+        </div>
+        {avazeh ? (
+          <>
+            <div>
+              <AvazehSeal avazeh={avazeh} brandColor={project.brandColor} />
+            </div>
+            <div>
+              <p className="label">{fa.avazeh.dashEmbedTitle}</p>
+              <CopySnippet multiline text={sealEmbedCode} />
+            </div>
+          </>
+        ) : (
+          <p className="text-sm text-ink/60">{fa.avazeh.dashNotEnough(faDigits(AVAZEH_MIN_RATED))}</p>
+        )}
       </div>
 
       <WidgetPreview slug={project.slug} />

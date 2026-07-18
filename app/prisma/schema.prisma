@@ -39,6 +39,9 @@ model Project {
   logoUrl      String?
   questionsJson String? // JSON array of custom guiding questions (falls back to defaults)
   plan         String        @default("free") // "free" | "pro"
+  // Telegram notifications + in-chat moderation (null = not connected).
+  telegramChatId    String?
+  telegramLinkToken String? @unique // single-use /start token while linking
   createdAt    DateTime      @default(now())
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   testimonials Testimonial[]
