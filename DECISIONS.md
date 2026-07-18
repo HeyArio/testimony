@@ -72,6 +72,35 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   (`scripts/demo-tunnel.sh`): getUserMedia requires a secure origin, quick
   tunnels give free https with no account; URL rotates per run, so this is a
   demo tool, not a production plan.
+- **The embed background is transparent** (`app/src/app/w/layout.tsx`): the
+  widget sits on other people's pages and must not bring Gavah's porcelain
+  page color with it. Cards carry their own white/ink surfaces; the empty
+  state got a card wrapper so it stays readable on any host background.
+- **The embed iframe reports the height of its content root (`#gavah-root`),
+  not `documentElement.scrollHeight`.** The document can never be shorter
+  than the iframe viewport, so measuring it lets the reported height ratchet
+  up but never shrink — one early oversized report (pre-CSS) left a
+  permanent blank void under the wall. Observed in testing, fixed.
+- **The widget carries a "ثبت تجربه" CTA linking to the collect page**
+  (`/r/[slug]`, new tab), rendered on both embed layouts and the hosted
+  wall, in the project's brand color; hidden when the free cap is full.
+  Collection itself never happens inside the widget — the widget displays,
+  the collect page records. Always-on (no config attribute) as the boring
+  option while there are no existing customers to surprise; add an opt-out
+  if someone asks.
+- **Dashboard shows a live widget preview** (`WidgetPreview.tsx`): the real
+  `/w/[slug]` iframe inside a mock browser window on a white host page,
+  resized with the same postMessage protocol embed.js uses — so "how will
+  it look on my customer's site" is answered in the product, not imagined.
+- **`clientIp()` trusts the LAST X-Forwarded-For hop, not the first.** nginx
+  appends the real client IP (`$proxy_add_x_forwarded_for`); everything
+  before it is client-supplied, and keying rate limits on the first hop let
+  a spoofed header reset the limit per request.
+- **Logo URL validation maps the URL back to a storage key** instead of
+  requiring an absolute URL on `R2_PUBLIC_BASE_URL` — local-storage mode
+  hands out relative `/media/logos/…` URLs, which the old check (and
+  `z.url()`) rejected, so logo upload was broken in demo mode. Accepted iff
+  `keyFromPublicUrl()` yields `logos/<uuid>.<ext>`.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

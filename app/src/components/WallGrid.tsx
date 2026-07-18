@@ -11,6 +11,8 @@ type WallProps = {
   testimonials: Testimonial[];
   brandColor: string;
   showBadge: boolean;
+  /** Public collect page URL; renders a "leave yours" CTA when set. */
+  collectUrl?: string | null;
 };
 
 function WallCard({ testimonial: t, brandColor }: { testimonial: Testimonial; brandColor: string }) {
@@ -44,7 +46,7 @@ function WallCard({ testimonial: t, brandColor }: { testimonial: Testimonial; br
 function Badge({ show }: { show: boolean }) {
   if (!show) return null;
   return (
-    <p className="mt-4 text-center">
+    <p className="text-center">
       <a
         className="text-xs font-bold text-ink/50 hover:text-primary"
         href={appUrl()}
@@ -57,12 +59,35 @@ function Badge({ show }: { show: boolean }) {
   );
 }
 
+/** CTA into the collect page + free-plan badge, under both layouts. */
+function WallFooter({ collectUrl, brandColor, showBadge }: Pick<WallProps, "collectUrl" | "brandColor" | "showBadge">) {
+  if (!collectUrl && !showBadge) return null;
+  return (
+    <div className="mt-4 flex flex-col items-center gap-2.5">
+      {collectUrl && (
+        <a
+          className="rounded-full px-5 py-2 text-sm font-bold text-white transition-opacity hover:opacity-85"
+          href={collectUrl}
+          rel="noopener noreferrer"
+          style={{ background: brandColor }}
+          target="_blank"
+        >
+          {fa.wall.cta}
+        </a>
+      )}
+      <Badge show={showBadge} />
+    </div>
+  );
+}
+
 function Empty() {
-  return <p className="py-10 text-center text-ink/60">{fa.wall.empty}</p>;
+  // The embed background is transparent — keep the empty state on a card so
+  // it stays readable on any host page.
+  return <p className="card py-8 text-center text-ink/60">{fa.wall.empty}</p>;
 }
 
 /** Masonry layout — the default wall. */
-export function WallGrid({ testimonials, brandColor, showBadge }: WallProps) {
+export function WallGrid({ testimonials, brandColor, showBadge, collectUrl }: WallProps) {
   return (
     <div>
       {testimonials.length === 0 ? (
@@ -74,13 +99,13 @@ export function WallGrid({ testimonials, brandColor, showBadge }: WallProps) {
           ))}
         </div>
       )}
-      <Badge show={showBadge} />
+      <WallFooter brandColor={brandColor} collectUrl={collectUrl} showBadge={showBadge} />
     </div>
   );
 }
 
 /** Horizontal scroll-snap carousel — compact strip for landing pages. */
-export function WallCarousel({ testimonials, brandColor, showBadge }: WallProps) {
+export function WallCarousel({ testimonials, brandColor, showBadge, collectUrl }: WallProps) {
   return (
     <div>
       {testimonials.length === 0 ? (
@@ -92,7 +117,7 @@ export function WallCarousel({ testimonials, brandColor, showBadge }: WallProps)
           ))}
         </div>
       )}
-      <Badge show={showBadge} />
+      <WallFooter brandColor={brandColor} collectUrl={collectUrl} showBadge={showBadge} />
     </div>
   );
 }

@@ -2,6 +2,7 @@
 node_modules/
 app/.next/
 app/out/
+app/tsconfig.tsbuildinfo
 
 # env & secrets
 .env

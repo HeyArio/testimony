@@ -10,6 +10,7 @@ import { faDigits } from "@/lib/format";
 import { CopySnippet } from "@/components/CopySnippet";
 import { ManualAddForm } from "@/components/ManualAddForm";
 import { TestimonialCard } from "@/components/TestimonialCard";
+import { WidgetPreview } from "@/components/WidgetPreview";
 
 export const dynamic = "force-dynamic";
 
@@ -68,7 +69,10 @@ export default async function ProjectPage({ params }: { params: { projectId: str
           <p className="label">{fa.inbox.embedCarouselTitle}</p>
           <CopySnippet multiline text={embedCarouselCode} />
         </div>
+        <p className="text-xs leading-fa text-ink/60">{fa.inbox.embedCtaNote}</p>
       </div>
+
+      <WidgetPreview slug={project.slug} />
 
       {isFree && (
         <p className="card border-accent text-sm">

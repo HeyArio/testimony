@@ -11,9 +11,13 @@ const updateSchema = z.object({
     .string()
     .regex(/^#[0-9a-fA-F]{6}$/)
     .optional(),
-  logoUrl: z.string().url().max(500).nullable().optional(),
+  // Not z.url(): local-storage mode hands out relative "/media/…" URLs.
+  // Real validation below maps the URL back to a key in our own storage.
+  logoUrl: z.string().max(500).nullable().optional(),
   questions: z.array(z.string().trim().min(1).max(120)).max(5).optional(),
 });
+
+const LOGO_KEY_RE = /^logos\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(png|jpg|webp)$/;
 
 async function ownedProject(id: string) {
   const user = await getSessionUser();
@@ -31,10 +35,13 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   }
-  // Only allow logo URLs on our own media host — never arbitrary origins.
-  const base = process.env.R2_PUBLIC_BASE_URL;
-  if (parsed.data.logoUrl && (!base || !parsed.data.logoUrl.startsWith(base))) {
-    return NextResponse.json({ error: "invalid_input" }, { status: 400 });
+  // Only allow logo URLs that map back to a UUID logo key in our own storage
+  // (R2 public URL or local-mode /media path) — never arbitrary origins.
+  if (parsed.data.logoUrl) {
+    const key = keyFromPublicUrl(parsed.data.logoUrl);
+    if (!key || !LOGO_KEY_RE.test(key)) {
+      return NextResponse.json({ error: "invalid_input" }, { status: 400 });
+    }
   }
   const { questions, ...rest } = parsed.data;
   await db.project.update({

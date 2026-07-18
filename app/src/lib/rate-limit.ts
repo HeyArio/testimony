@@ -19,8 +19,14 @@ export function rateLimit(key: string, limit: number, windowMs: number): boolean
 }
 
 export function clientIp(req: Request): string {
-  // Behind nginx; first hop of X-Forwarded-For is the client.
+  // Behind nginx with $proxy_add_x_forwarded_for, which APPENDS the real
+  // client IP to whatever the client sent — so only the LAST hop is
+  // trustworthy. Taking the first hop would let anyone reset their rate
+  // limit per request with a spoofed X-Forwarded-For header.
   const xff = req.headers.get("x-forwarded-for");
-  if (xff) return xff.split(",")[0].trim();
+  if (xff) {
+    const hops = xff.split(",");
+    return hops[hops.length - 1].trim();
+  }
   return req.headers.get("x-real-ip") ?? "unknown";
 }

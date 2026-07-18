@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
-import { showBadge } from "@/lib/plan";
+import { showBadge, testimonialCapReached } from "@/lib/plan";
 import { fa } from "@/i18n/fa";
 import { WallGrid } from "@/components/WallGrid";
 
@@ -15,6 +15,7 @@ export default async function WallPage({ params }: { params: { slug: string } })
     },
   });
   if (!project) notFound();
+  const collectUrl = (await testimonialCapReached(project)) ? null : `/r/${project.slug}`;
 
   return (
     <main className="mx-auto max-w-5xl px-5 py-10">
@@ -25,7 +26,12 @@ export default async function WallPage({ params }: { params: { slug: string } })
         )}
         <h1 className="text-2xl font-black">{fa.wall.title(project.name)}</h1>
       </header>
-      <WallGrid brandColor={project.brandColor} showBadge={showBadge(project)} testimonials={project.testimonials} />
+      <WallGrid
+        brandColor={project.brandColor}
+        collectUrl={collectUrl}
+        showBadge={showBadge(project)}
+        testimonials={project.testimonials}
+      />
     </main>
   );
 }
