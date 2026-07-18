@@ -34,6 +34,14 @@ main() {
     fi
   fi
 
+  echo "==> demo seed (idempotent — keeps the live marketing demo alive)"
+  # Creates/updates the کافه گندم demo project the marketing site embeds.
+  # Safe to run every deploy: it upserts and skips existing testimonials.
+  # Must never abort the deploy — the site works without it (static fallback).
+  if ! node scripts/seed-demo.mjs; then
+    echo "    WARNING: demo seed failed; marketing pages fall back to static samples."
+  fi
+
   echo "==> pm2: start/restart gavah + gavah-worker"
   pm2 startOrRestart ecosystem.config.js --update-env
   pm2 save

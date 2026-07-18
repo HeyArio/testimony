@@ -137,6 +137,9 @@ export function LiveDemoSite({ slug, brandColor }: { slug: string; brandColor: s
           <div className="border-t border-[#F2EDE9] px-5 py-5 text-center text-xs text-ink/40">{c.footer}</div>
         </div>
       </div>
+
+      {/* invite to try the live loop */}
+      <p className="mx-auto mt-5 max-w-2xl text-center text-[13.5px] leading-fa text-[#9B8288]">{p.tryNote}</p>
     </div>
   );
 }

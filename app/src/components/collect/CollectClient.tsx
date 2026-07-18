@@ -11,12 +11,25 @@ type RecState = "idle" | "recording" | "preview";
 
 export function CollectClient({ slug }: { slug: string }) {
   const [mode, setMode] = useState<Mode>("choose");
+  // True when the API auto-published the entry (demo project) — the visitor
+  // can go see their own words on the wall right away.
+  const [published, setPublished] = useState(false);
+
+  function done(isPublished: boolean) {
+    setPublished(isPublished);
+    setMode("done");
+  }
 
   if (mode === "done") {
     return (
       <div className="card text-center">
         <p className="text-2xl font-black">{fa.collect.thanksTitle}</p>
-        <p className="mt-2 text-ink/80">{fa.collect.thanksBody}</p>
+        <p className="mt-2 text-ink/80">{published ? fa.collect.thanksLiveBody : fa.collect.thanksBody}</p>
+        {published && (
+          <a className="btn-primary mt-4" href={`/wall/${slug}`}>
+            {fa.collect.seeWall}
+          </a>
+        )}
       </div>
     );
   }
@@ -33,8 +46,8 @@ export function CollectClient({ slug }: { slug: string }) {
           </button>
         </div>
       )}
-      {mode === "video" && <VideoFlow onDone={() => setMode("done")} slug={slug} />}
-      {mode === "text" && <TextFlow onDone={() => setMode("done")} slug={slug} />}
+      {mode === "video" && <VideoFlow onDone={done} slug={slug} />}
+      {mode === "text" && <TextFlow onDone={done} slug={slug} />}
     </div>
   );
 }
@@ -103,7 +116,7 @@ function readMeta(form: FormData) {
   };
 }
 
-function TextFlow({ slug, onDone }: { slug: string; onDone: () => void }) {
+function TextFlow({ slug, onDone }: { slug: string; onDone: (published: boolean) => void }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -118,9 +131,9 @@ function TextFlow({ slug, onDone }: { slug: string; onDone: () => void }) {
       body: JSON.stringify({ type: "text", text: String(form.get("text") ?? ""), ...readMeta(form) }),
     });
     setBusy(false);
-    if (res.ok) onDone();
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) onDone(!!data.published);
     else {
-      const data = await res.json().catch(() => ({}));
       setError(data.error === "limit_reached" ? fa.collect.full : fa.common.error);
     }
   }
@@ -138,7 +151,7 @@ function TextFlow({ slug, onDone }: { slug: string; onDone: () => void }) {
   );
 }
 
-function VideoFlow({ slug, onDone }: { slug: string; onDone: () => void }) {
+function VideoFlow({ slug, onDone }: { slug: string; onDone: (published: boolean) => void }) {
   const [rec, setRec] = useState<RecState>("idle");
   const [seconds, setSeconds] = useState(0);
   const [blob, setBlob] = useState<Blob | null>(null);
@@ -260,11 +273,11 @@ function VideoFlow({ slug, onDone }: { slug: string; onDone: () => void }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "video", videoKey: key, ...readMeta(form) }),
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         throw new Error(data.error === "limit_reached" ? "full" : "submit");
       }
-      onDone();
+      onDone(!!data.published);
     } catch (err) {
       setError(err instanceof Error && err.message === "full" ? fa.collect.full : fa.common.error);
     } finally {
