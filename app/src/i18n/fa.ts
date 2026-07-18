@@ -95,8 +95,8 @@ export const fa = {
     wallSection: {
       kicker: "دیوار افتخار",
       title: "دیوار افتخار تو، دقیقاً همین شکلی می‌شود",
-      sub: "ترکیبی از ویدیو و متن — همان چیزی که مشتری بعدی‌ات باید ببیند.",
-      demoLink: "نمونه‌ی زنده را ببین ←",
+      sub: "این یک نمونه‌ی زنده است — سایتِ یک کافه‌ی نمونه با ویجت واقعی گواه، همین حالا از سرور.",
+      demoLink: "نمونه‌ی کامل را با کد نصب ببین ←",
     },
     sampleWall: {
       videos: [
@@ -193,12 +193,13 @@ export const fa = {
       barText: "این یک سایت نمونه است — ویجت گواه همین‌طوری روی سایت تو می‌نشیند.",
       barCta: "دیوار خودت را بساز",
       title: "ویجت گواه، روی سایتِ خودت",
-      sub: "پایین را ببین: سایتِ یک استودیوی یوگا، و دیوار افتخارش — دقیقاً همان چیزی که بازدیدکننده‌های سایتش می‌بینند.",
+      sub: "پایین را ببین: سایتِ یک کافه‌ی نمونه، و دیوار افتخارش — دقیقاً همان چیزی که بازدیدکننده‌های سایتش می‌بینند. این ویجت زنده است و همین حالا از سرور گواه می‌آید.",
       tabWall: "چیدمان دیوار",
       tabCarousel: "چیدمان اسلایدر",
       widgetTag: "این بخش، ویجت گواه است",
+      widgetTagLive: "این بخش، ویجتِ واقعی گواه است — زنده",
       embedTitle: "همه‌ی این، با دو خط کد",
-      embedNote: "رنگ ستاره‌ها و هایلایت زیرنویس‌ها خودکار از رنگ برند خودت گرفته می‌شود — اینجا سبزِ استودیوی یوگاست.",
+      embedNote: "رنگ ستاره‌ها و دکمه‌ی ثبت، خودکار از رنگ برند خودت گرفته می‌شود — اینجا رنگ برند کافه‌ی نمونه است.",
       flowKicker: "ویجت نمایش می‌دهد؛ جمع‌آوری این‌طور اتفاق می‌افتد",
       flowTitle: "نظرها از کجا می‌آیند؟",
       flowSteps: [
@@ -219,9 +220,25 @@ export const fa = {
         "پس پاسخ سوال همیشگی: ثبت نظر داخل خود ویجت انجام نمی‌شود — ویجت نمایش می‌دهد و دکمه‌اش صفحه‌ی جمع‌آوری تو را باز می‌کند.",
       bottomCtaTitle: "دیوار افتخار تو هم می‌تواند فردا روی سایتت باشد",
     },
+    // The live demo site: کافه گندم is the seeded demo project (see
+    // scripts/seed-demo.mjs), so its widget shows real data. Used by
+    // LiveDemoSite on the home and /demo pages.
+    demoCafe: {
+      url: "cafe-gandom.ir",
+      brand: "کافه گندم",
+      nav: ["منو", "درباره‌ی ما", "تماس"],
+      navCta: "سفارش آنلاین",
+      heroTitle: "قهوه‌ی تازه‌رست، هر روز صبح",
+      heroSub: "دانه‌های منتخب، رست هفتگی و فضایی دنج برای کار و قرارهای دوستانه",
+      heroCta: "دیدن منو",
+      sectionKicker: "نظر مشتری‌ها",
+      sectionTitle: "مشتری‌های کافه چه می‌گویند",
+      footer: "© ۱۴۰۵ کافه گندم · همه‌ی حقوق محفوظ است",
+    },
     // The fictional customer site shown inside the /demo browser frame. The
     // widget content is *her students* praising the studio — a real wall shows
-    // the business's customers, not Gavah's.
+    // the business's customers, not Gavah's. (Static fallback for when the
+    // seeded demo project doesn't exist.)
     demoSite: {
       url: "yoga-sara.ir",
       brand: "استودیو یوگا سارا",

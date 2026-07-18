@@ -46,7 +46,10 @@ const LOCAL_STORAGE = !process.env.R2_ACCOUNT_ID;
 
 const DEMO_EMAIL = "demo@gavah.local";
 const DEMO_PASSWORD = "demo1234";
-const DEMO_SLUG = "cafe-gandom";
+const DEMO_SLUG = "cafe-gandom"; // keep in sync with app/src/lib/demo.ts
+// Roasted-coffee brown, deliberately NOT Gavah's crimson: the live demo on
+// the marketing site should show the widget wearing the *customer's* brand.
+const DEMO_BRAND_COLOR = "#7A4E2D";
 const CONSENT = "نمونه‌ی دمو — توسط مالک پروژه اضافه شده است.";
 
 // Fictional café + fictional people. All content is invented demo copy.
@@ -97,8 +100,9 @@ async function main() {
   });
   const project = await db.project.upsert({
     where: { slug: DEMO_SLUG },
-    update: { plan: "pro" }, // pro: no badge on the wall, HD clip renders
-    create: { userId: user.id, name: "کافه گندم", slug: DEMO_SLUG, plan: "pro" },
+    // pro: no badge on the wall, HD clip renders
+    update: { plan: "pro", brandColor: DEMO_BRAND_COLOR },
+    create: { userId: user.id, name: "کافه گندم", slug: DEMO_SLUG, plan: "pro", brandColor: DEMO_BRAND_COLOR },
   });
 
   if (process.argv.includes("--reset")) {

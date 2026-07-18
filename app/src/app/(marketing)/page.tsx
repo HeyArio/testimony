@@ -1,11 +1,17 @@
 import Link from "next/link";
+import { db } from "@/lib/db";
+import { DEMO_SLUG } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
 import { FaqAccordion } from "@/components/marketing/FaqAccordion";
 import { EmbedCodeCard } from "@/components/marketing/EmbedCodeCard";
+import { LiveDemoSite } from "@/components/marketing/LiveDemoSite";
 import { PlanCards } from "@/components/marketing/PlanCards";
 import { SampleWall } from "@/components/marketing/SampleWall";
 
 const m = fa.marketing;
+
+// The wall section embeds the LIVE demo widget (static samples as fallback).
+export const revalidate = 300;
 
 // Dark textured background used across the mockups' dark sections.
 const darkTexture = {
@@ -111,7 +117,8 @@ function SectionHeading({ kicker, title, sub }: { kicker?: string; title: string
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const demoProject = await db.project.findUnique({ where: { slug: DEMO_SLUG } });
   return (
     <main>
       {/* hero */}
@@ -274,11 +281,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* wall of love */}
+      {/* wall of love — the real widget, live */}
       <section className="px-5 py-16 sm:py-28">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-4xl">
           <SectionHeading kicker={m.wallSection.kicker} title={m.wallSection.title} sub={m.wallSection.sub} />
-          <SampleWall />
+          {demoProject ? (
+            <LiveDemoSite brandColor={demoProject.brandColor} slug={demoProject.slug} />
+          ) : (
+            <SampleWall />
+          )}
           <div className="mt-8 text-center">
             <Link className="font-bold text-primary-dark hover:text-ink" href="/demo">
               {m.wallSection.demoLink}

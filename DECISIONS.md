@@ -101,6 +101,15 @@ Decisions not (fully) covered by CLAUDE.md, and why. Newest last.
   hands out relative `/media/logos/…` URLs, which the old check (and
   `z.url()`) rejected, so logo upload was broken in demo mode. Accepted iff
   `keyFromPublicUrl()` yields `logos/<uuid>.<ext>`.
+- **The marketing site embeds the LIVE demo widget** (`LiveDemoSite.tsx`, on
+  the home wall section and /demo): a fictional کافه گندم website in a
+  browser frame whose testimonials section is the real `/w/cafe-gandom`
+  iframe — the seeded demo project, so real data, no login, resized via the
+  same postMessage protocol. Pages are ISR (300s) and fall back to the old
+  static sample cards when the demo project doesn't exist, so the marketing
+  site can't break on a fresh install. The seed gives the café its own
+  brand color (`#7A4E2D`) so the widget visibly wears a customer brand, not
+  Gavah's; re-run `node scripts/seed-demo.mjs` after deploy to apply it.
 - **The app port lives in `app/.env` (`PORT`, default 3000) and nowhere else.**
   `next start` only honors PORT from process env, so ecosystem.config.js
   injects it; setup-vps.sh writes the nginx proxy_pass from the same value

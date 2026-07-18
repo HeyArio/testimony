@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { db } from "@/lib/db";
+import { DEMO_SLUG } from "@/lib/demo";
 import { fa } from "@/i18n/fa";
 import { DemoSiteFrame } from "@/components/marketing/DemoSiteFrame";
+import { LiveDemoSite } from "@/components/marketing/LiveDemoSite";
 import { EmbedCodeCard } from "@/components/marketing/EmbedCodeCard";
 
 const m = fa.marketing;
+
+// The centerpiece is the LIVE widget of the seeded demo project; cached like
+// the walls. Static mock as fallback when the demo project doesn't exist.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: `${m.nav.demo} | ${fa.common.appName}`,
   description: m.demoPage.sub,
 };
 
-export default function DemoPage() {
+export default async function DemoPage() {
+  const demoProject = await db.project.findUnique({ where: { slug: DEMO_SLUG } });
   return (
     <main>
       <div className="bg-ink px-5 py-3">
@@ -33,7 +41,11 @@ export default function DemoPage() {
             <h1 className="text-2xl font-black leading-fa sm:text-4xl">{m.demoPage.title}</h1>
             <p className="mx-auto mt-3.5 max-w-xl leading-fa text-[#5D4A51]">{m.demoPage.sub}</p>
           </div>
-          <DemoSiteFrame />
+          {demoProject ? (
+            <LiveDemoSite brandColor={demoProject.brandColor} slug={demoProject.slug} />
+          ) : (
+            <DemoSiteFrame />
+          )}
         </div>
       </section>
 
